@@ -1,0 +1,336 @@
+<?php $order_id = $block->getData('order_id');  $increment_id = $block->getData('increment_id'); ?>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<?php if($order_id!=null) { ?>
+			<div class="prescription-container margin-t10 display-flex flex-wrap">
+				<div class="prescription-item-social">
+					<a href="https://wa.me/7230909090?text=Please%20find%20my%20prescription%20for%20order%<?php echo $increment_id; ?>">
+					<img class="prescription_icon" src="pub/media/svg/whatsapp.svg"/>WhatsApp Prescription</a>
+					<a href="mailto:info@bharatoptics.com"><img class="prescription_icon" src="pub/media/svg/email.svg"/>Email Prescription</a>
+				</div>
+				<div class="prescription-item">
+					<div class="my-prescription">
+						<h2 class="title margin-b10">Add your eyepower below</h2>
+					</div>
+					<form name="addData" method="post" id="addData" class="form"
+		              action="/post"
+		              data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>"
+		              data-mage-init='{"validation":{}}'>
+					<div class="power-content">
+						<div class="add-power-tabel add-power-column power-colmn-five">
+							<div class="power-submit-panel text-uppercase">
+								<div class="power-submit-head heading">Eye</div>
+								<div class="power-submit-head heading">Right Eye</div>
+								<div class="power-submit-head heading">Left Eye</div>
+							</div>
+							<div class="power-block power-submit-panel power-submit-defadivt">
+								<div class="parent-list">
+									<div class="power-submit-head heading text-uppercase">Spherical</div>
+									<div class="parent-list-item">
+										<select name="right_sph" id="right_sph">
+										  <?php
+											 $sphoptions = "";
+											 $minsph = '-6.00'; $maxsph= '6.00';
+											 
+											 $start = '-6.00';
+											 while($start <= $maxsph){
+												 
+												 $sel = "";
+												 $pls = "+";
+												 if($start == 0){ $sel = 'selected=""'; } else { $sel = ''; }
+												 
+												 $start = number_format($start,2);
+												 if($start <= 0){ $pls=""; }
+												 
+												 $sphoptions .= '<option '.$sel.' value="'.$pls.$start.'">'.$pls.$start.'</option>';  
+												 $start = $start + 0.25 ;    	 
+											 } 
+											 
+											 echo $sphoptions;
+										  ?>
+										</select>
+									</div>
+									<div class="parent-list-item">
+										<select name="left_sph" id="left_sph">
+										  <?php echo $sphoptions; ?>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="power-block power-submit-panel power-submit-defadivt">
+								<div class="parent-list">
+									<div class="power-submit-head heading text-uppercase">Cylindrical</div>
+									<div class="parent-list-item">
+										<select name="right_cyl" id="right_cyl">
+										   <?php
+											 $cyloptions = "";
+											 $mincyl = '-4.00'; $maxcyl= '4.00';
+											 
+											 $start = '-4.00';
+											 while($start <= $maxcyl){
+												 
+												 $sel = "";
+												 $pls = "+";
+												 if($start == 0){ $sel = 'selected=""'; } else { $sel = ''; }
+												 if($start <= 0){ $pls = ""; }
+												 $start = number_format($start,2);
+												 $cyloptions .= '<option '.$sel.' value="'.$pls.$start.'">'.$pls.$start.'</option>';  
+												 $start = $start + 0.25 ;    	 
+											 } 
+											 
+											 echo $cyloptions;
+										  ?>	
+										</select>
+									</div>
+									<div class="parent-list-item">
+										<select name="left_cyl" id="left_cyl">
+										  <?php echo $sphoptions; ?>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="power-block power-submit-panel power-submit-defadivt">
+								<div class="parent-list">
+									<div class="power-submit-head heading text-uppercase">Axis</div>
+									<div class="parent-list-item">
+										<select name="right_axis" id="right_axis">
+										   <?php
+											 $axisoptions = "";
+											 $minaxis = '1'; $maxaxis = '180';
+											 
+											 $start = '1';
+											 while($start <= $maxaxis){
+												 
+												 if($start == '90'){ $axisoptions .= '<option selected="selected" value="" > ----- </option>';   }
+												 $axisoptions .= '<option value="'.$start.'">'.$start.'</option>';  
+												 $start = $start + 1 ;    	 
+											 } 
+											 
+											 echo $axisoptions;
+										  ?>	
+										</select>
+									</div>
+									<div class="parent-list-item">
+										<select name="left_axis" id="left_axis">
+											 <?php echo $axisoptions; ?>	
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="power-block power-submit-panel power-submit-defadivt">
+								<div class="parent-list">
+									<div class="power-submit-head heading text-uppercase">Ap</div>
+									<div class="parent-list-item">
+										<select  name="right_add" id="right_add">
+										   <?php
+											 $addoptions = "";
+											 $minadd = '0.75'; $maxadd = '3.00';
+											 
+											 $start = '0.75';
+											 $pls = '+';
+											 while($start <= $maxadd){
+												 
+												 if($start == '0.75'){ $addoptions .= '<option selected="selected" value="" > ----- </option>';   }
+												 $start = number_format($start,2);
+												 $addoptions .= '<option value="'.$pls.$start.'">'.$pls.$start.'</option>';  
+												 $start = $start + 0.25 ;    	 
+											 } 
+											 
+											 echo $addoptions;
+										  ?>	
+										</select>
+									</div>
+									<div class="parent-list-item">
+										<select  name="left_add" id="left_add">
+											 <?php echo $addoptions; ?>	
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<button type="submit" class="single_add_to_cart_button sk-btn sk-btn--full sk-btn--primary sk-btn--pulse sk-add-to-cart-btn add-to-cart-js wc-variation-selection-needed">
+								<span class="sk-btn__ripple"><span class="sk-btn__ripple--circle"></span></span>
+								<span class="sk-btn__label add">Submit Eye Power</span>
+								<span class="sk-btn__label load">In aggiunta...</span>
+								<span class="sk-btn__label added">Aggiunto<span class="svg-data">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 78.369 78.369">
+								<path fill="#000" d="M78.049 19.015L29.458 67.606c-.428.428-1.121.428-1.548 0L.32 40.015c-.427-.426-.427-1.119 0-1.547l6.704-6.704c.428-.427 1.121-.427 1.548 0l20.113 20.112 41.113-41.113c.429-.427 1.12-.427 1.548 0l6.703 6.704c.428.427.428 1.119 0 1.548z"></path>
+								</svg>
+								</span>
+								</span>
+							</button>
+						</div>						
+					</div>
+					</form>
+					<script type="text/javascript">
+					require(['jquery'],function(){
+						jQuery(document).ready(function() {
+							jQuery("#addData").submit(function(e){
+								e.preventDefault();
+								
+									jQuery('.page.messages').html('');
+
+									var formData = new FormData(this);
+									
+									var right_sph = jQuery('#right_sph').find(":selected").val();
+									var left_sph = jQuery('#left_sph').find(":selected").val();
+									var right_cyl = jQuery('#right_cyl').find(":selected").val();
+									var left_cyl = jQuery('#left_cyl').find(":selected").val();
+									var right_axis = jQuery('#right_axis').find(":selected").val();
+									var left_axis = jQuery('#left_axis').find(":selected").val();
+									var right_add = jQuery('#right_add').find(":selected").val();
+									var left_add = jQuery('#left_add').find(":selected").val();
+									formData.append('right_sph', right_sph);
+									formData.append('left_sph', left_sph);
+									formData.append('right_cyl', right_cyl);
+									formData.append('left_cyl', left_cyl);
+									formData.append('right_axis', right_axis);
+									formData.append('left_axis', left_axis);
+									formData.append('right_add', right_add);
+									formData.append('left_add', left_add);
+
+									var url = "<?php echo $block->getBaseUrl().'addprescription?order_id='.$increment_id ?>";
+									jQuery.ajax({
+										url: url,
+										type: "POST",
+										dataType: "JSON",
+										contentType: false,
+										enctype: 'multipart/form-data',
+										processData: false,
+										data: formData,
+										showLoader: true,
+										cache: false,
+										success: function(response){
+											if(response == "1"){
+												jQuery(".page.messages").html('<div role="alert" class="messages"><div class="message-success success message" data-ui-id="message-success"><div >You saved the data.</div></div></div>');
+												jQuery('#prescription_image').val('');
+											}else{
+												jQuery(".page.messages").html('<div role="alert" class="messages"><div class="alert danger alert-danger" data-ui-id="message-danger"><div >Data could not saved ! .</div></div></div>');
+											}
+											jQuery(".page.messages").delay(200).fadeIn().delay(4000).fadeOut();
+										}
+									});
+									/* return false; */
+								
+
+							});
+						});
+					});
+					</script>
+				</div>
+				<div class="prescription-item">
+					<div class="my-prescription">
+						<h2 class="title margin-b10">Or Upload prescription</h2>
+					</div>
+					<div class="power-content">
+						<form name="form_prescription_file" method="POST" id="form_prescription_file" enctype="multipart/form-data"  accept-charset="utf-8"  
+    data-mage-init='{"validation":{}}'>
+						<input type="hidden" name="order_id" value="<?php echo $order_id; ?>">
+						<div class="submit-calling margin-t10">
+							<input type="file" name="prescription_image" id="upload_prescription" data-validate="{required:true}" class="input-text"/>
+							<span class="exclaimation">
+								<i aria-hidden="true" class="fa fa-check-circle fa-lg" style="top: 0px; position: relative; left: 0.8px;"></i>
+							</span>
+							<span class="icon-container">
+								<i aria-hidden="true" class="fa fa-cloud-upload fa-3x"></i>
+							</span>
+							<!--<span class="cloud">Your prescription image has been uploaded with us.</span>-->
+							<button type="submit" class="single_add_to_cart_button sk-btn sk-btn--full sk-btn--primary sk-btn--pulse sk-add-to-cart-btn add-to-cart-js wc-variation-selection-needed">
+								<span class="sk-btn__ripple"><span class="sk-btn__ripple--circle"></span></span>
+								<span class="sk-btn__label add">Upload</span>
+								<span class="sk-btn__label load">In aggiunta...</span>
+								<span class="sk-btn__label added">Aggiunto<span class="svg-data">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 78.369 78.369">
+								<path fill="#000" d="M78.049 19.015L29.458 67.606c-.428.428-1.121.428-1.548 0L.32 40.015c-.427-.426-.427-1.119 0-1.547l6.704-6.704c.428-.427 1.121-.427 1.548 0l20.113 20.112 41.113-41.113c.429-.427 1.12-.427 1.548 0l6.703 6.704c.428.427.428 1.119 0 1.548z"></path>
+								</svg>
+								</span>
+								</span>
+							</button>
+							<div class="clearfix"></div>
+							<div class="file-uploader-meta">
+						        
+						    </div>
+						</div>
+						</form>
+					</div>
+					<script>
+					/*require(['jquery'],function(){
+						jQuery(document).ready(function() {
+							jQuery("#form_prescription_file").submit(function(e){
+								e.preventDefault();
+								var fileValue = jQuery("input[name='prescription_image']").val();
+								var order_id = jQuery("input[name='order_id']").val();
+								
+								var url = "<?php echo $block->getBaseUrl().'addprescription?order_id='.$increment_id ?>";
+								jQuery.ajax({
+								url: url,
+								type: "POST",
+								data: {order_id:order_id,file:fileValue},
+								showLoader: true,
+								cache: false,
+								success: function(response){
+									console.log(response.output);
+								}
+							});
+							return false;
+							});
+						});
+					}); */
+					
+					require(['jquery'],function(){
+						jQuery(document).ready(function() {
+							
+							jQuery("#form_prescription_file").submit(function(e){
+								e.preventDefault();
+								if (jQuery('#form_prescription_file').valid()) {
+									jQuery('.page.messages').html('');
+									var event_filename = jQuery("input[name='prescription_image']").val();
+
+									var formData = new FormData(this);
+									var file_obj = jQuery('#prescription_image').val();/* document.getElementById("prescription_image"); */
+									formData.append('prescription_image', file_obj);
+
+									var url = "<?php echo $block->getBaseUrl().'addprescription?order_id='.$increment_id ?>";
+									jQuery.ajax({
+										url: url,
+										type: "POST",
+										dataType: "JSON",
+										contentType: false,
+										enctype: 'multipart/form-data',
+										processData: false,
+										/* /data: {fname:event_fname,lname:event_lname,address:event_address,city:event_city,mobilenumber:event_mobilenumber,filename:event_filename},*/
+										data: formData,
+										showLoader: true,
+										cache: false,
+										success: function(response){
+											/* console.log(response.output);
+											jQuery('.page.messages').html(response); */
+											jQuery('.file-uploader-meta').html('<img src="<?php echo $block->getBaseUrl(); ?>'+response.image);
+											if(response.status == "1"){
+												jQuery(".page.messages").html('<div role="alert" class="messages"><div class="message-success success message" data-ui-id="message-success"><div >You saved the data.</div></div></div>');
+												jQuery('#prescription_image').val('');
+											}else{
+												jQuery(".page.messages").html('<div role="alert" class="messages"><div class="alert danger alert-danger" data-ui-id="message-danger"><div >Data could not saved ! .</div></div></div>');
+											} 
+											jQuery(".page.messages").delay(200).fadeIn().delay(4000).fadeOut();
+										}
+									});
+									return false;
+								}
+
+							});
+						});
+					});
+					</script>
+
+				</div>	
+			</div>
+			<?php } else { ?>
+			<div class="prescription-container margin-t10 display-flex flex-wrap">
+			Sorry we did not find your order, Please try again later!
+			</div>
+			<?php } ?>
+		</div>
+	</div>
+</div>

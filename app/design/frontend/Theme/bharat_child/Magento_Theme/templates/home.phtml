@@ -1,0 +1,624 @@
+<?php 
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$base_url = $storeManager->getStore()->getBaseUrl();
+?>
+<div id="main_banner_home "data-mage-init='{"Swissup_Swiper/js/swiper" : {"lazy": true, "slidesPerView": 1, "freeMode": true, "loop": true, "autoplay": {"delay": 3000, "disableOnInteraction": false}, "navigation": {"nextEl": ".swiper-button-next", "prevEl": ".swiper-button-prev"}, "breakpoints": {"768": {"slidesPerView": 1}, "600": {"slidesPerView": 1}, "480": {"slidesPerView": 1}}}}' class="swiper-container d-none d-lg-block">
+	<div class="swiper-wrapper">
+	<div class="swiper-slide">
+	<img class="lazy" src="<?php echo $base_url.'pub/media/banners/home_eyeglass_banners.webp'; ?>" data-src="<?php echo $base_url.'pub/media/banners/home_eyeglass_banners.webp'; ?>" loading="lazy" alt="Buy Eyeglasses online" height="700px"/>
+	</div>
+	<div class="swiper-slide">
+	<img class="lazy" src="<?php echo $base_url.'pub/media/banners/home_sunglass_banner.webp'; ?>" data-src="<?php echo $base_url.'pub/media/banners/home_sunglass_banner.webp'; ?>" loading="lazy" alt="Buy Sunglasses online" height="700px"/>
+	</div>
+	</div>
+</div>
+<div id="main_banner_home "data-mage-init='{"Swissup_Swiper/js/swiper" : {"lazy": true, "slidesPerView": 1, "freeMode": true, "loop": true, "autoplay": {"delay": 3000, "disableOnInteraction": false}, "navigation": {"nextEl": ".swiper-button-next", "prevEl": ".swiper-button-prev"}, "breakpoints": {"768": {"slidesPerView": 1}, "600": {"slidesPerView": 1}, "480": {"slidesPerView": 1}}}}' class="swiper-container d-none d-ss-block">
+	<div class="swiper-wrapper">
+	<div class="swiper-slide">
+	<img class="lazy" src="<?php echo $base_url.'pub/media/banners/home_mobile1.webp'; ?>" data-src="<?php echo $base_url.'pub/media/banners/home_mobile1.webp'; ?>" loading="lazy" alt="Buy Eyeglasses online" height="700px"/>
+	</div>
+	<div class="swiper-slide">
+	<img class="lazy" src="<?php echo $base_url.'pub/media/banners/home_mobile2.webp'; ?>" data-src="<?php echo $base_url.'pub/media/banners/home_mobile2.webp'; ?>" loading="lazy" alt="Buy Sunglasses online" height="700px"/>
+	</div>
+	</div>
+</div>
+
+<div class="sk-section sk-boxicons sk-section__bg--cyan pdg-top--2x pdg-bottom--2x pattern pattern--heart">
+	<div class="container">
+		<div class="row g-3 justify-content-center">
+			<div class="col-6 col-lg-3 sk-col">
+				<div class="boxicons__item text-center">
+					<div class="boxicons__media sk-media">
+						<img class="sk-lazyload sk-lazyload__img entered loaded is--loaded" loading="lazy" alt="Free Shipping" src="<?php echo $this->getUrl('pub/media/svg').'free_shipping.svg'; ?>">
+					</div>
+					<h3 class="boxicons__title">Free Shipping</h3>
+					<p class="boxicons__text">We offer free shipping on all orders.</p>
+				</div>
+			</div>
+			<div class="col-6 col-lg-3 sk-col">
+				<div class="boxicons__item text-center">
+					<div class="boxicons__media sk-media">
+						<img class="sk-lazyload sk-lazyload__img entered loaded is--loaded" loading="lazy" alt="Easy Return" src="<?php echo $this->getUrl('pub/media/svg').'easy_return.svg'; ?>">
+					</div>
+					<h3 class="boxicons__title">Quick and easy return</h3>
+					<p class="boxicons__text">We will reimburse you as soon as we receive your parcel.</p>
+				</div>
+			</div>
+			<div class="col-6 col-lg-3 sk-col">
+				<div class="boxicons__item text-center">
+					<div class="boxicons__media sk-media">
+						<img class="sk-lazyload sk-lazyload__img entered loaded is--loaded" loading="lazy" alt="Fast Delivery" src="<?php echo $this->getUrl('pub/media/svg').'fast_delivery.svg'; ?>">
+					</div>
+					<h3 class="boxicons__title">Fast Delivery</h3>
+					<p class="boxicons__text">We will deliver your order in 2 to 4 days.</p>
+				</div>
+			</div>
+			<div class="col-6 col-lg-3 sk-col">
+				<div class="boxicons__item text-center">
+					<div class="boxicons__media sk-media">
+						<img class="sk-lazyload sk-lazyload__img entered loaded is--loaded" loading="lazy" alt="cod" data-ll-status="loaded" src="<?php echo $this->getUrl('pub/media/svg').'cod.svg'; ?>">
+					</div>
+					<h3 class="boxicons__title">Cash On Delivery</h3>
+					<p class="boxicons__text">Cash On Delivery available for all orders.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<?php  
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+ 
+$eyeglasscategoryId = 3;
+$categoryFactory = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
+$category = $categoryFactory->load($eyeglasscategoryId);
+ 
+$eyeglassProducts = $category->getProductCollection()->addAttributeToSelect('*')->setOrder('price','ASC')->setPageSize(8);
+
+?>
+<div class="sk-section sk-recently-products pdg-top--3x pdg-bottom--0x" data-product="no">
+	<div class="deco deco--top-left deco--rose"></div>
+	<div class="container container-blur container-blur--right">
+		<div class="row">
+			<div class="col-12 col-lg-9 sk-col">
+				<div class="sk-headings text-center text-lg-start">
+					<h1 class="sk-headings__title">Eyeglasses 💎</h1>
+					<div class="sk-headings__description"><p>The heart is not commanded! If you love them, get them before your product runs out.</p></div>
+				</div>
+			</div>
+			<div class="recently-view-js">
+				<div class="col-12 sk-col">
+					<div class="sk-carousel sk-carousel--generic" data-type="product-recently">
+						<div class="sk-carousel__wrapper">
+							<div class="sk-carousel__swiper swiper swiper-horizontal" data-mage-init='{"Swissup_Swiper/js/swiper" : {"lazy": true, "slidesPerView": 4, "freeMode": true, "loop": true, "autoplay": {"delay": 2500, "disableOnInteraction": false}, "spaceBetween": 20, "scrollbar":{ "el": ".swiper-scrollbar"},  "navigation": {"nextEl": ".swiper-button-next", "prevEl": ".swiper-button-prev"}, "breakpoints": {"768": {"slidesPerView": 3}, "600": {"slidesPerView": 2}, "480": {"slidesPerView": 1}}}}'>
+								<div class="swiper-wrapper" id="swiper-wrapper-34a0638f10935868a" aria-live="polite">
+									<?php foreach ($eyeglassProducts as $eyeglass) {  ?>			
+										<div class="swiper-slide">
+											<div class="sk-product" data-type="shop">
+												<div class="sk-product__item">
+													<div class="sk-product__head">
+														<a class="sk-product__wishlist sk-ajax_add_to_wishlist_button" data-post='<?php  echo $this->helper('Magento\Wishlist\Helper\Data')->getAddParams($eyeglass) ?>'  data-action="add-to-wishlist">
+															<span class="svg-data sk-product__wishlist--icon">
+																	<svg viewBox="0 0 33 29" xmlns="http://www.w3.org/2000/svg">
+																		<path d="M16.905 27.8831a.7597.7597 0 0 1-.8096 0h-.0001c-.1807-.1142-4.4712-2.8451-8.4615-6.7898-2.3653-2.3385-4.1246-4.6167-5.229-6.7714C.9793 11.5402.6366 8.9467 1.3865 6.6133c.4893-1.5843 1.513-3.0155 2.88-4.022C5.6804 1.5504 7.3666 1 9.1425 1c3.413 0 5.4237 2.047 7.3582 4.0434C18.458 3.0325 20.5066 1 23.8577 1c1.776 0 3.4622.5503 4.8762 1.5914 1.3659 1.0056 2.3888 2.4353 2.881 4.0258.7482 2.3323.4052 4.9246-1.0196 7.7047-1.1042 2.1548-2.8635 4.433-5.2288 6.7714-3.9902 3.9447-8.2807 6.6756-8.4614 6.7898Z" stroke="#000" stroke-width="2" fill="none"></path>
+																	</svg></span>
+														</a>
+													</div>
+													<a href="<?php echo $eyeglass->getProductUrl(); ?>" title="<?php echo $eyeglass->getName(); ?>" class="sk-product__link">
+														<div class="sk-product__media">								
+															<div class="sk-product__image">				
+																<div class="sk-media">
+																	<img class="sk-media__image" alt="<?php echo $eyeglass->getName(); ?>" src="<?php echo 'pub/media/catalog/product/'.$eyeglass->getThumbnail(); ?>">
+																</div>
+															</div>
+														</div>
+													</a>
+													<div class="sk-product__details">
+													<a href="<?php echo $eyeglass->getProductUrl(); ?>" title="<?php echo $eyeglass->getName(); ?>" class="sk-product__link">
+													<h2 class="sk-product__title truncate-text"><?php echo $eyeglass->getName(); ?></h2>
+													<p class="sk-product__description truncate-text">Free Power Lens</p>
+													<div class="sk-product__price woocommerce-Price">
+														<span class="woocommerce-Price-amount amount">
+															<bdi><span class="woocommerce-Price-currencySymbol">₹</span><?php echo $eyeglass->getFinalPrice(); ?>&nbsp;</bdi>
+														</span>
+													</div>
+													
+													<!--<div class="sk-product__colors">
+														<span class="color__label">4 colori</span>
+														<ul class="color__lists">
+															<li><span class="color__thumb" style="background-image: url(https://www.sublimeshop.it/wp-content/uploads/2022/06/519853B5-190E-439F-AE1B-D20833476BE4-30x30.jpg);"></span></li><li><span class="color__thumb" style="background-image: url(https://www.sublimeshop.it/wp-content/uploads/2022/06/3290E601-C5C1-4617-AB14-3E6A26887C9A-30x30.jpg);"></span></li><li><span class="color__thumb" style="background-image: url(https://www.sublimeshop.it/wp-content/uploads/2022/06/E9FABB86-C652-4C44-A8E6-9D41413E7FD9-30x30.jpg);"></span></li>
+															<li class="color__diff">+ 1</li>
+														</ul>
+													</div>-->
+												</a>
+												
+									<?php /* <div class="sk-product__quick-add quick-view-js">
+										<?php $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+										$listBlock = $objectManager->get('\Magento\Catalog\Block\Product\ListProduct');
+										$addToCartUrl =  $listBlock->getAddToCartUrl($eyeglass); ?>
+										<form data-role="tocart-form" action="<?php echo $addToCartUrl; ?>" method="post"> 
+										<?php echo $block->getBlockHtml('formkey')?>
+										<button class="quick-add__button" type="submit" title="<?php / * @escapeNotVerified * / echo __('Buy Now') ?>">
+											<span class="quick-add__label"><?php / * @escapeNotVerified * / echo __('Buy Now') ?></span>
+											<span class="svg-data quick-add__icon">
+											<svg viewBox="0 0 27 29" xmlns="http://www.w3.org/2000/svg">
+											<g fill="none" fill-rule="evenodd">
+													<path class="path-cart" d="M22.3477 24.4283c0 .4489-.1.8147-.2972 1.0884-.2201.3056-.5436.467-.9356.467H5.2554c-.3916 0-.715-.1614-.9356-.467-.197-.2737-.2968-.6399-.2968-1.0884v-.0389c0-.0125.0007-.025.0026-.0372l1.9777-13.5796a.2263.2263 0 0 0 .0026-.0207l.0055-.0557a.3273.3273 0 0 0 .0013-.0178c.0484-.8713.6752-1.5537 1.4263-1.5537h1.8962v2.8322c0 .2348.1877.4248.4189.4248s.419-.19.419-.4248V9.1247h6.0246v2.8322c0 .2348.1877.4248.4189.4248s.4186-.19.4186-.4248V9.1247h1.8965c.7511 0 1.3776.6824 1.4263 1.5537a.2615.2615 0 0 0 .0013.0178l.0055.056a.436.436 0 0 0 .0023.0204l1.9725 13.5414.0055.0382a.2877.2877 0 0 1 .0026.0376v.0385ZM13.1853 3.6827c1.6611 0 3.0124 1.3703 3.0124 3.0547v1.5377H10.173V6.7374c0-1.6844 1.3513-3.0547 3.0123-3.0547Zm9.9882 20.545-1.976-13.5693-.004-.0373c-.0776-1.3163-1.0697-2.346-2.2618-2.346h-1.8965V6.7374c0-2.1527-1.727-3.904-3.8499-3.904-2.1228 0-3.8501 1.7513-3.8501 3.904v1.5377H7.439c-1.1925 0-2.1842 1.0297-2.2622 2.346l-.0035.0376L3.1969 24.228a1.1205 1.1205 0 0 0-.0117.1613v.0389c0 .6326.1542 1.1674.4585 1.5896.3787.5256.9512.8154 1.6117.8154H21.115c.6606 0 1.2331-.2898 1.6117-.8154.3043-.4222.4586-.957.4586-1.5896v-.0385c0-.0544-.004-.1087-.0117-.162Z" fill="#FFF"></path>
+													<path class="path-cart" d="M22.3477 24.4283c0 .4489-.1.8147-.2972 1.0884-.2201.3056-.5436.467-.9356.467H5.2554c-.3916 0-.715-.1614-.9356-.467-.197-.2737-.2968-.6399-.2968-1.0884v-.0389c0-.0125.0007-.025.0026-.0372l1.9777-13.5796a.2263.2263 0 0 0 .0026-.0207l.0055-.0557a.3273.3273 0 0 0 .0013-.0178c.0484-.8713.6752-1.5537 1.4263-1.5537h1.8962v2.8322c0 .2348.1877.4248.4189.4248s.419-.19.419-.4248V9.1247h6.0246v2.8322c0 .2348.1877.4248.4189.4248s.4186-.19.4186-.4248V9.1247h1.8965c.7511 0 1.3776.6824 1.4263 1.5537a.2615.2615 0 0 0 .0013.0178l.0055.056a.436.436 0 0 0 .0023.0204l1.9725 13.5414.0055.0382a.2877.2877 0 0 1 .0026.0376v.0385ZM13.1853 3.6827c1.6611 0 3.0124 1.3703 3.0124 3.0547v1.5377H10.173V6.7374c0-1.6844 1.3513-3.0547 3.0123-3.0547Zm9.9882 20.545-1.976-13.5693-.004-.0373c-.0776-1.3163-1.0697-2.346-2.2618-2.346h-1.8965V6.7374c0-2.1527-1.727-3.904-3.8499-3.904-2.1228 0-3.8501 1.7513-3.8501 3.904v1.5377H7.439c-1.1925 0-2.1842 1.0297-2.2622 2.346l-.0035.0376L3.1969 24.228a1.1205 1.1205 0 0 0-.0117.1613v.0389c0 .6326.1542 1.1674.4585 1.5896.3787.5256.9512.8154 1.6117.8154H21.115c.6606 0 1.2331-.2898 1.6117-.8154.3043-.4222.4586-.957.4586-1.5896v-.0385c0-.0544-.004-.1087-.0117-.162Z" stroke="#FFF" stroke-width=".75"></path>
+												</g>
+											</svg>
+											</span>
+										</button>	
+										</form>
+									</div> */ ?>
+											</div>
+										</div>
+										<span class="gtm4wp_productdata" style="display:none; visibility:hidden;" data-gtm4wp_product_id="<?php echo $eyeglass->getId(); ?>" data-gtm4wp_product_name="<?php echo $eyeglass->getName(); ?>" data-gtm4wp_product_price="<?php echo $eyeglass->getFinalPrice(); ?>" data-gtm4wp_product_cat="Eyeglass" data-gtm4wp_product_url="<?php echo $eyeglass->getProductUrl(); ?>" data-gtm4wp_product_listposition="" data-gtm4wp_productlist_name="Eyeglasses List" data-gtm4wp_product_stocklevel="" data-gtm4wp_product_brand=""></span>
+									</div>
+								</div>
+								<?php } ?>
+								</div>
+								<div class="swiper-scrollbar swiper-scrollbar-horizontal swiper-scrollbar-lock" style="display: none;">
+									<div class="swiper-scrollbar-drag"></div>
+								</div>
+								<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+							</div>
+						</div>
+						<div class="swiper-navigation swiper-navigation--top">
+							<div class="swiper-button-prev swiper-arrow" tabindex="-1" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-ded40302818627310">
+								<span class="svg-data">
+									<svg viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+									<path stroke="#9A56FB" d="M17.8402 22.6803 8 12.8401 17.8402 3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+									</svg>
+								</span>
+							</div>
+							<div class="swiper-button-next swiper-arrow" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-ded40302818627310">
+								<span class="svg-data">
+									<svg viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+									<path stroke="#9A56FB" d="m8 3 9.8402 9.8402L8 22.6803" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+									</svg>
+								</span>
+							</div>
+						</div>						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="sk-section sk-color-cards pdg-top--3x pdg-bottom--3x">
+	<div class="deco deco--bottom-right deco--blue"></div>
+		<div class="container-xxl">
+			<div class="row">
+				<div class="col-12 sk-col">
+					<div class="sk-carousel sk-carousel--generic" data-type="cards">
+						<div class="sk-carousel__wrapper">
+							<div class="sk-carousel__swiper swiper swiper-horizontal swiper-pointer-events swiper-autoheight swiper-watch-progress swiper-backface-hidden" data-mage-init='{"Swissup_Swiper/js/swiper" : {"lazy": true, "slidesPerView": 3, "freeMode": true, "loop": false, "autoplay": {"delay": 2500, "disableOnInteraction": false}, "spaceBetween": 30, "scrollbar":{ "el": ".swiper-scrollbar"}, "navigation": {"nextEl": ".swiper-button-next", "prevEl": ".swiper-button-prev"}, "breakpoints": {"768": {"slidesPerView": 3}, "600": {"slidesPerView": 2}, "480": {"slidesPerView": 1}}}}'>
+							<div class="swiper-wrapper" id="swiper-wrapper-7e229d83f101b3e7d" aria-live="polite">
+							<div class="swiper-slide" >
+								<a href="#" class="card__link" title="Scopri i saldi">
+									<div class="card__item card__item--rose text-center">
+										<div class="card__media sk-media">
+											<img class="sk-lazyload swiper-lazy swiper-lazy-loaded" loading="lazy" alt="percentuale" src="<?php echo $this->getUrl('pub/media/svg').'percentuale.svg'; ?>"></div>
+											<div class="card__details">
+											<h3 class="card__title">Free Blue Block<br>Power Lens</h3>
+											<p class="card__label">with all Eyeglasses</p>
+											<div class="card__cta sk-btn sk-btn--primary">
+											<span class="sk-btn__ripple"><span class="sk-btn__ripple--circle"></span></span>
+											<span class="sk-btn__label">Shop Now</span>
+											</div>
+											</div>
+										</div>
+								</a>
+							</div>
+							<div class="swiper-slide">
+								<a href="#" class="card__link" title="inizia lo shopping">
+								<div class="card__item card__item--cyan text-center">
+									<div class="card__media sk-media">
+										<img class="sk-lazyload swiper-lazy swiper-lazy-loaded" loading="lazy" alt="magic" src="<?php echo $this->getUrl('pub/media/svg').'magic.svg'; ?>">
+									</div>
+									<div class="card__details">
+										<h3 class="card__title">Sunglasses Starting From</h3>
+										<p class="card__label">Rs 350</p>
+										<div class="card__cta sk-btn sk-btn--primary">
+										<span class="sk-btn__ripple"><span class="sk-btn__ripple--circle"></span></span>
+										<span class="sk-btn__label">Shop Now</span>
+										</div>
+									</div>
+								</div>
+								</a>
+							</div>
+							<div class="swiper-slide">
+								<a href="#" class="card__link" title="Acquista ora">
+									<div class="card__item card__item--violet text-center">
+										<div class="card__media sk-media">
+											<img class="sk-lazyload swiper-lazy swiper-lazy-loaded" loading="lazy" alt="scalapay" src="<?php echo $this->getUrl('pub/media/svg').'scalapay.svg'; ?>">
+										</div>
+										<div class="card__details">
+											<h3 class="card__title">Eyeglasses frame starting from<br></h3>
+											<p class="card__label"> Rs 499</p>
+											<div class="card__cta sk-btn sk-btn--primary">
+												<span class="sk-btn__ripple"><span class="sk-btn__ripple--circle"></span></span>
+												<span class="sk-btn__label">Shop Now</span>
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="swiper-scrollbar swiper-scrollbar-horizontal swiper-scrollbar-lock" style="display: none;">
+							<div class="swiper-scrollbar-drag"></div>
+						</div>
+						<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+<?php 
+$sunglasscategoryId = 24;
+$categoryFactory = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
+$category = $categoryFactory->load($sunglasscategoryId);
+ 
+$saleProducts = $category->getProductCollection()->addAttributeToSelect('*')->setOrder('price','ASC')->setPageSize(8);
+
+?>
+
+<div class="sk-section sk-tab-products pdg-top--0x pdg-bottom--2x">
+	<div class="deco deco--bottom-right deco--blue"></div>
+	<div class="container container-blur container-blur--left">
+	<div class="row">
+	<div class="col-12 sk-col">
+		<div class="tab__list">
+			<ul>
+				<li class="tab__title is--activated" data-position="0"> Sale 🔥</li>
+				<li class="tab__title" data-position="1">New Arrivals 🚀</li>
+			</ul>
+		</div>
+		<div class="tab__content is--activated" data-slider="0">
+			<div class="tab__text">
+			<p>The favorite eyeglasses of BharatOptics Lovers ready to become part of your collection.</p>
+			</div>
+			<div class="sk-carousel sk-carousel--dynamic">
+			<div class="sk-carousel__wrapper">
+			<div class="sk-carousel__swiper swiper swiper-initialized swiper-horizontal swiper-pointer-events swiper-autoheight swiper-watch-progress" data-mage-init='{"Swissup_Swiper/js/swiper" : {"lazy": true, "slidesPerView": 3, "freeMode": true, "loop": true, "autoplay": {"delay": 2500, "disableOnInteraction": false}, "spaceBetween": 20, "scrollbar":{ "el": ".swiper-scrollbar"}, "navigation": {"nextEl": ".swiper-button-next", "prevEl": ".swiper-button-prev"}, "breakpoints": {"768": {"slidesPerView": 3}, "600": {"slidesPerView": 2}, "480": {"slidesPerView": 1}}}}'>
+			<div class="swiper-wrapper" id="swiper-wrapper-ded40302818627310" aria-live="polite" style="height: auto;">
+			<?php foreach ($saleProducts as $sale) {  ?>	
+			<div class="swiper-slide">
+			<div class="sk-product" data-type="shop">
+			<div class="sk-product__item">
+				<div class="sk-product__head">
+				<?php
+					$amount = $sale->getPrice() - $sale->getFinalPrice();
+					$price = ($amount*100) / $sale->getPrice();	
+				  $percentage = number_format($price, 0);
+				?>
+				<div class="sk-product__badges"><div class="badge badge__sales"><span class="badge__label"><?php echo $percentage.'% Off'; ?></span></div><div class="badge badge__top"><span class="badge__label">Top</span></div></div>
+				<div class="sk-product__wishlist sk-ajax_add_to_wishlist_button" data-post='<?php  echo $this->helper('Magento\Wishlist\Helper\Data')->getAddParams($sale) ?>'  data-action="add-to-wishlist">
+					<span class="svg-data sk-product__wishlist--icon">
+					<svg viewBox="0 0 33 29" xmlns="http://www.w3.org/2000/svg">
+					<path d="M16.905 27.8831a.7597.7597 0 0 1-.8096 0h-.0001c-.1807-.1142-4.4712-2.8451-8.4615-6.7898-2.3653-2.3385-4.1246-4.6167-5.229-6.7714C.9793 11.5402.6366 8.9467 1.3865 6.6133c.4893-1.5843 1.513-3.0155 2.88-4.022C5.6804 1.5504 7.3666 1 9.1425 1c3.413 0 5.4237 2.047 7.3582 4.0434C18.458 3.0325 20.5066 1 23.8577 1c1.776 0 3.4622.5503 4.8762 1.5914 1.3659 1.0056 2.3888 2.4353 2.881 4.0258.7482 2.3323.4052 4.9246-1.0196 7.7047-1.1042 2.1548-2.8635 4.433-5.2288 6.7714-3.9902 3.9447-8.2807 6.6756-8.4614 6.7898Z" stroke="#000" stroke-width="2" fill="none"></path>
+					</svg>
+					</span>
+				</div>
+				</div>
+				<a href="<?php echo $sale->getProductUrl(); ?>" title="<?php echo $sale->getName(); ?>" class="sk-product__link">
+					<div class="sk-product__media">
+						<div class="sk-product__image" data-hover="yes">
+							<div class="sk-media">
+								<img class="sk-media__image sk-lazyload swiper-lazy" loading="lazy" alt="<?php echo $sale->getName(); ?>" src="<?php echo 'pub/media/catalog/product/'.$sale->getThumbnail(); ?>">
+							</div>
+						</div>
+					</div>
+				</a>
+				<div class="sk-product__details">
+				<a href="<?php echo $sale->getProductUrl(); ?>" title="<?php echo $sale->getName(); ?>" class="sk-product__link">
+				<h2 class="sk-product__title truncate-text" data-wg-notranslate=""><?php echo $sale->getName(); ?></h2>
+				<!--<p class="sk-product__description truncate-text"></p>
+				<p>mocassino in ecopelle nero</p>-->
+				<div class="sk-product__price woocommerce-Price">
+					<span class="woocommerce-Price-amount amount">
+						<bdi><span class="woocommerce-Price-currencySymbol">₹</span><?php echo $sale->getFinalPrice(); ?>&nbsp;</bdi>
+					</span>
+				</div>
+				<!--<div class="sk-product__colors">
+					<span class="color__label">3 colori</span>
+					<ul class="color__lists"><li><span class="color__thumb" style="background-image: url(https://www.sublimeshop.it/wp-content/uploads/2022/06/519853B5-190E-439F-AE1B-D20833476BE4-30x30.jpg);"></span></li><li><span class="color__thumb" style="background-image: url(https://www.sublimeshop.it/wp-content/uploads/2022/06/519853B5-190E-439F-AE1B-D20833476BE4-30x30.jpg);"></span></li><li><span class="color__thumb" style="background-image: url(https://www.sublimeshop.it/wp-content/uploads/2022/06/519853B5-190E-439F-AE1B-D20833476BE4-30x30.jpg);"></span></li>
+					</ul>
+				</div>-->
+				</a>
+				<?php /* <div class="sk-product__quick-add quick-view-js" data-product="522515">
+					<?php $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+					$listBlock = $objectManager->get('\Magento\Catalog\Block\Product\ListProduct');
+					$addToCartUrl =  $listBlock->getAddToCartUrl($sale); ?>
+					<form data-role="tocart-form" action="<?php echo $addToCartUrl; ?>" method="post"> 
+					<?php echo $block->getBlockHtml('formkey')?>
+					<button type="submit" class="quick-add__button">
+						<span class="quick-add__label">Buy Now</span>
+						<span class="svg-data quick-add__icon">
+							<svg viewBox="0 0 27 29" xmlns="http://www.w3.org/2000/svg">
+							<g fill="none" fill-rule="evenodd">
+							<path class="path-cart" d="M22.3477 24.4283c0 .4489-.1.8147-.2972 1.0884-.2201.3056-.5436.467-.9356.467H5.2554c-.3916 0-.715-.1614-.9356-.467-.197-.2737-.2968-.6399-.2968-1.0884v-.0389c0-.0125.0007-.025.0026-.0372l1.9777-13.5796a.2263.2263 0 0 0 .0026-.0207l.0055-.0557a.3273.3273 0 0 0 .0013-.0178c.0484-.8713.6752-1.5537 1.4263-1.5537h1.8962v2.8322c0 .2348.1877.4248.4189.4248s.419-.19.419-.4248V9.1247h6.0246v2.8322c0 .2348.1877.4248.4189.4248s.4186-.19.4186-.4248V9.1247h1.8965c.7511 0 1.3776.6824 1.4263 1.5537a.2615.2615 0 0 0 .0013.0178l.0055.056a.436.436 0 0 0 .0023.0204l1.9725 13.5414.0055.0382a.2877.2877 0 0 1 .0026.0376v.0385ZM13.1853 3.6827c1.6611 0 3.0124 1.3703 3.0124 3.0547v1.5377H10.173V6.7374c0-1.6844 1.3513-3.0547 3.0123-3.0547Zm9.9882 20.545-1.976-13.5693-.004-.0373c-.0776-1.3163-1.0697-2.346-2.2618-2.346h-1.8965V6.7374c0-2.1527-1.727-3.904-3.8499-3.904-2.1228 0-3.8501 1.7513-3.8501 3.904v1.5377H7.439c-1.1925 0-2.1842 1.0297-2.2622 2.346l-.0035.0376L3.1969 24.228a1.1205 1.1205 0 0 0-.0117.1613v.0389c0 .6326.1542 1.1674.4585 1.5896.3787.5256.9512.8154 1.6117.8154H21.115c.6606 0 1.2331-.2898 1.6117-.8154.3043-.4222.4586-.957.4586-1.5896v-.0385c0-.0544-.004-.1087-.0117-.162Z" fill="#FFF"></path>
+							<path class="path-cart" d="M22.3477 24.4283c0 .4489-.1.8147-.2972 1.0884-.2201.3056-.5436.467-.9356.467H5.2554c-.3916 0-.715-.1614-.9356-.467-.197-.2737-.2968-.6399-.2968-1.0884v-.0389c0-.0125.0007-.025.0026-.0372l1.9777-13.5796a.2263.2263 0 0 0 .0026-.0207l.0055-.0557a.3273.3273 0 0 0 .0013-.0178c.0484-.8713.6752-1.5537 1.4263-1.5537h1.8962v2.8322c0 .2348.1877.4248.4189.4248s.419-.19.419-.4248V9.1247h6.0246v2.8322c0 .2348.1877.4248.4189.4248s.4186-.19.4186-.4248V9.1247h1.8965c.7511 0 1.3776.6824 1.4263 1.5537a.2615.2615 0 0 0 .0013.0178l.0055.056a.436.436 0 0 0 .0023.0204l1.9725 13.5414.0055.0382a.2877.2877 0 0 1 .0026.0376v.0385ZM13.1853 3.6827c1.6611 0 3.0124 1.3703 3.0124 3.0547v1.5377H10.173V6.7374c0-1.6844 1.3513-3.0547 3.0123-3.0547Zm9.9882 20.545-1.976-13.5693-.004-.0373c-.0776-1.3163-1.0697-2.346-2.2618-2.346h-1.8965V6.7374c0-2.1527-1.727-3.904-3.8499-3.904-2.1228 0-3.8501 1.7513-3.8501 3.904v1.5377H7.439c-1.1925 0-2.1842 1.0297-2.2622 2.346l-.0035.0376L3.1969 24.228a1.1205 1.1205 0 0 0-.0117.1613v.0389c0 .6326.1542 1.1674.4585 1.5896.3787.5256.9512.8154 1.6117.8154H21.115c.6606 0 1.2331-.2898 1.6117-.8154.3043-.4222.4586-.957.4586-1.5896v-.0385c0-.0544-.004-.1087-.0117-.162Z" stroke="#FFF" stroke-width=".75"></path>
+							</g>
+							</svg>
+						</span>
+					</button>
+					</form>
+				</div> */ ?>
+			</div>
+			</div>
+			<span class="gtm4wp_productdata" style="display:none; visibility:hidden;" data-gtm4wp_product_id="<?php echo $sale->getId(); ?>" data-gtm4wp_product_name="<?php echo $sale->getName(); ?>" data-gtm4wp_product_price="<?php echo $sale->getFinalPrice(); ?>" data-gtm4wp_product_cat="Eyeglass" data-gtm4wp_product_url="<?php echo $sale->getProductUrl(); ?>" data-gtm4wp_product_listposition="" data-gtm4wp_productlist_name="Eyeglass 🔥 Product List" data-gtm4wp_product_stocklevel="" data-gtm4wp_product_brand=""></span>
+			</div>
+			</div>
+		<?php } ?>
+			</div>
+			
+			<div class="swiper-scrollbar swiper-scrollbar-horizontal">
+				<div class="swiper-scrollbar-drag"></div>
+			</div>
+			<span class="swiper-notification"></span>
+			<div class="sk-carousel__cta text-center">
+				<a class="sk-btn sk-btn--primary" href="<?php echo $base_url.'eyeglasses/sales.html'; ?>" title="Eyeglass">
+					<span class="sk-btn__ripple"><span class="sk-btn__ripple--circle"></span></span>
+					<span class="sk-btn__label">View More</span>
+				</a>
+			</div>
+			</div>
+</div>
+
+<div class="swiper-navigation swiper-navigation--top">
+	<div class="swiper-button-prev swiper-arrow">
+		<span class="svg-data">
+			<svg viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+			<path stroke="#9A56FB" d="M17.8402 22.6803 8 12.8401 17.8402 3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+			</svg>
+		</span>
+	</div>
+	<div class="swiper-button-next swiper-arrow">
+		<span class="svg-data">
+			<svg viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+			<path stroke="#9A56FB" d="m8 3 9.8402 9.8402L8 22.6803" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+			</svg>
+		</span>
+	</div>
+</div> 
+</div>
+</div>
+<?php 
+$newarrivalsId = 25;
+$categoryFactory = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
+$category = $categoryFactory->load($newarrivalsId);
+ 
+$newArrivalsProducts = $category->getProductCollection()->addAttributeToSelect('*')->setOrder('price','ASC')->setPageSize(8); ?>
+<div class="tab__content" data-slider="1">
+<div class="tab__text"><p>The newly arrived sunglasses.</p></div>
+<div class="sk-carousel sk-carousel--dynamic">
+<div class="sk-carousel__wrapper">
+<div class="sk-carousel__swiper swiper" data-mage-init='{"Swissup_Swiper/js/swiper" : {"lazy": true, "slidesPerView": 4, "freeMode": true, "loop": true, "autoplay": {"delay": 2500, "disableOnInteraction": false}, "spaceBetween": 20, "scrollbar":{ "el": ".swiper-scrollbar"}, "navigation": {"nextEl": ".swiper-button-next", "prevEl": ".swiper-button-prev"}, "breakpoints": {"768": {"slidesPerView": 3}, "600": {"slidesPerView": 2}, "480": {"slidesPerView": 1}}}}'>
+<div class="swiper-wrapper">
+		<?php foreach ($newArrivalsProducts as $newArrivals) {  ?>
+			<div class="swiper-slide">
+				<div class="sk-product" data-type="shop">
+					<div class="sk-product__item">
+						<div class="sk-product__head">
+							<div class="sk-product__badges">
+							<div class="badge badge__new"><span class="badge__label">New</span></div>
+							</div>
+							<div class="sk-product__wishlist sk-ajax_add_to_wishlist_button" data-post='<?php  echo $this->helper('Magento\Wishlist\Helper\Data')->getAddParams($newArrivals) ?>'  data-action="add-to-wishlist">
+							<span class="svg-data sk-product__wishlist--icon">
+							<svg viewBox="0 0 33 29" xmlns="http://www.w3.org/2000/svg">
+							<path d="M16.905 27.8831a.7597.7597 0 0 1-.8096 0h-.0001c-.1807-.1142-4.4712-2.8451-8.4615-6.7898-2.3653-2.3385-4.1246-4.6167-5.229-6.7714C.9793 11.5402.6366 8.9467 1.3865 6.6133c.4893-1.5843 1.513-3.0155 2.88-4.022C5.6804 1.5504 7.3666 1 9.1425 1c3.413 0 5.4237 2.047 7.3582 4.0434C18.458 3.0325 20.5066 1 23.8577 1c1.776 0 3.4622.5503 4.8762 1.5914 1.3659 1.0056 2.3888 2.4353 2.881 4.0258.7482 2.3323.4052 4.9246-1.0196 7.7047-1.1042 2.1548-2.8635 4.433-5.2288 6.7714-3.9902 3.9447-8.2807 6.6756-8.4614 6.7898Z" stroke="#000" stroke-width="2" fill="none"></path>
+							</svg></span>
+							</div>
+						</div>
+						<a href="<?php echo $newArrivals->getProductUrl(); ?>" title="<?php echo $newArrivals->getName(); ?>" class="sk-product__link">
+							<div class="sk-product__media">
+								<div class="sk-product__image" data-hover="yes">
+									<div class="sk-media">
+										<img class="sk-media__image sk-lazyload swiper-lazy swiper-lazy-loaded" loading="lazy" alt="IMG_5945" src="<?php echo 'pub/media/catalog/product/'.$newArrivals->getThumbnail(); ?>">
+									</div>
+								</div>
+							</div>
+						</a>
+						<div class="sk-product__details">
+							<a href="<?php echo $newArrivals->getProductUrl(); ?>" title="<?php echo $newArrivals->getName(); ?>" class="sk-product__link">
+							<h2 class="sk-product__title truncate-text" data-wg-notranslate=""><?php echo $newArrivals->getName(); ?></h2>
+							<p class="sk-product__description truncate-text"></p>
+							<!--<p>sandalo in simil pelle argento</p>-->
+							<div class="sk-product__price woocommerce-Price">
+								<span class="woocommerce-Price-amount amount">
+									<bdi><span class="woocommerce-Price-currencySymbol">₹ </span><?php echo $newArrivals->getFinalPrice(); ?></bdi>
+								</span>
+							</div>
+							<!--<div class="sk-product__colors">
+							<span class="color__label">7 colori</span><ul class="color__lists"><li><span class="color__thumb" style="background-image: url(https://www.sublimeshop.it/wp-content/uploads/2022/06/A976B8B9-C885-402B-B3FB-2C7C6CF4E7A6.jpg);"></span></li><li><span class="color__thumb" style="background-image: url(https://www.sublimeshop.it/wp-content/uploads/2022/06/1D18851E-DB40-405C-8D2B-B2CBD659633D-30x30.jpg);"></span></li><li><span class="color__thumb" style="background-image: url(https://www.sublimeshop.it/wp-content/uploads/2022/06/008AA168-CAE7-4179-AD21-1A0EE2CBB55D-30x30.jpg);"></span></li><li class="color__diff">+ 4</li></ul></div>-->
+							</a>
+							<?php /* <div class="sk-product__quick-add quick-view-js" data-product="529808">
+								<?php $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+								$listBlock = $objectManager->get('\Magento\Catalog\Block\Product\ListProduct');
+								$addToCartUrl =  $listBlock->getAddToCartUrl($newArrivals); ?>
+								<form data-role="tocart-form" action="<?php echo $addToCartUrl; ?>" method="post"> 
+								<?php echo $block->getBlockHtml('formkey')?>
+								<button type="submit" class="quick-add__button">
+									<span class="quick-add__label">Buy Now</span>
+									<span class="svg-data quick-add__icon">
+										<svg viewBox="0 0 27 29" xmlns="http://www.w3.org/2000/svg">
+										<g fill="none" fill-rule="evenodd">
+										<path class="path-cart" d="M22.3477 24.4283c0 .4489-.1.8147-.2972 1.0884-.2201.3056-.5436.467-.9356.467H5.2554c-.3916 0-.715-.1614-.9356-.467-.197-.2737-.2968-.6399-.2968-1.0884v-.0389c0-.0125.0007-.025.0026-.0372l1.9777-13.5796a.2263.2263 0 0 0 .0026-.0207l.0055-.0557a.3273.3273 0 0 0 .0013-.0178c.0484-.8713.6752-1.5537 1.4263-1.5537h1.8962v2.8322c0 .2348.1877.4248.4189.4248s.419-.19.419-.4248V9.1247h6.0246v2.8322c0 .2348.1877.4248.4189.4248s.4186-.19.4186-.4248V9.1247h1.8965c.7511 0 1.3776.6824 1.4263 1.5537a.2615.2615 0 0 0 .0013.0178l.0055.056a.436.436 0 0 0 .0023.0204l1.9725 13.5414.0055.0382a.2877.2877 0 0 1 .0026.0376v.0385ZM13.1853 3.6827c1.6611 0 3.0124 1.3703 3.0124 3.0547v1.5377H10.173V6.7374c0-1.6844 1.3513-3.0547 3.0123-3.0547Zm9.9882 20.545-1.976-13.5693-.004-.0373c-.0776-1.3163-1.0697-2.346-2.2618-2.346h-1.8965V6.7374c0-2.1527-1.727-3.904-3.8499-3.904-2.1228 0-3.8501 1.7513-3.8501 3.904v1.5377H7.439c-1.1925 0-2.1842 1.0297-2.2622 2.346l-.0035.0376L3.1969 24.228a1.1205 1.1205 0 0 0-.0117.1613v.0389c0 .6326.1542 1.1674.4585 1.5896.3787.5256.9512.8154 1.6117.8154H21.115c.6606 0 1.2331-.2898 1.6117-.8154.3043-.4222.4586-.957.4586-1.5896v-.0385c0-.0544-.004-.1087-.0117-.162Z" fill="#FFF"></path>
+										<path class="path-cart" d="M22.3477 24.4283c0 .4489-.1.8147-.2972 1.0884-.2201.3056-.5436.467-.9356.467H5.2554c-.3916 0-.715-.1614-.9356-.467-.197-.2737-.2968-.6399-.2968-1.0884v-.0389c0-.0125.0007-.025.0026-.0372l1.9777-13.5796a.2263.2263 0 0 0 .0026-.0207l.0055-.0557a.3273.3273 0 0 0 .0013-.0178c.0484-.8713.6752-1.5537 1.4263-1.5537h1.8962v2.8322c0 .2348.1877.4248.4189.4248s.419-.19.419-.4248V9.1247h6.0246v2.8322c0 .2348.1877.4248.4189.4248s.4186-.19.4186-.4248V9.1247h1.8965c.7511 0 1.3776.6824 1.4263 1.5537a.2615.2615 0 0 0 .0013.0178l.0055.056a.436.436 0 0 0 .0023.0204l1.9725 13.5414.0055.0382a.2877.2877 0 0 1 .0026.0376v.0385ZM13.1853 3.6827c1.6611 0 3.0124 1.3703 3.0124 3.0547v1.5377H10.173V6.7374c0-1.6844 1.3513-3.0547 3.0123-3.0547Zm9.9882 20.545-1.976-13.5693-.004-.0373c-.0776-1.3163-1.0697-2.346-2.2618-2.346h-1.8965V6.7374c0-2.1527-1.727-3.904-3.8499-3.904-2.1228 0-3.8501 1.7513-3.8501 3.904v1.5377H7.439c-1.1925 0-2.1842 1.0297-2.2622 2.346l-.0035.0376L3.1969 24.228a1.1205 1.1205 0 0 0-.0117.1613v.0389c0 .6326.1542 1.1674.4585 1.5896.3787.5256.9512.8154 1.6117.8154H21.115c.6606 0 1.2331-.2898 1.6117-.8154.3043-.4222.4586-.957.4586-1.5896v-.0385c0-.0544-.004-.1087-.0117-.162Z" stroke="#FFF" stroke-width=".75"></path>
+										</g>
+										</svg>
+									</span>
+								</button>
+								</form>
+							</div> */ ?>
+						</div>
+					</div>
+					<span class="gtm4wp_productdata" style="display:none; visibility:hidden;" data-gtm4wp_product_id="529808" data-gtm4wp_product_name="" data-gtm4wp_product_price="34.99" data-gtm4wp_product_cat="Sandali" data-gtm4wp_product_url="sunglasses/new-arrivals.html" data-gtm4wp_product_listposition="" data-gtm4wp_productlist_name="New Arrivals 🚀 Product List" data-gtm4wp_product_stocklevel="" data-gtm4wp_product_brand=""></span>
+				</div>
+			</div>
+		<?php } ?>
+</div>
+<div class="swiper-scrollbar">
+	<div class="swiper-scrollbar-drag"></div>
+</div>
+<div class="sk-carousel__cta text-center">
+	<a class="sk-btn sk-btn--primary" href="<?php echo $base_url.'sunglasses/new-arrivals.html'; ?>" title="Scoprile Ora">
+		<span class="sk-btn__ripple">
+		<span class="sk-btn__ripple--circle"></span>
+		</span>
+		<span class="sk-btn__label">View More</span>
+	</a>
+</div>
+</div>
+</div>
+<div class="swiper-navigation swiper-navigation--top">
+	<div class="swiper-button-prev swiper-arrow">
+		<span class="svg-data">
+			<svg viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+			<path stroke="#9A56FB" d="M17.8402 22.6803 8 12.8401 17.8402 3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+			</svg>
+		</span>
+	</div>
+	<div class="swiper-button-next swiper-arrow">
+		<span class="svg-data">
+			<svg viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+			<path stroke="#9A56FB" d="m8 3 9.8402 9.8402L8 22.6803" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+			</svg>
+		</span>
+	</div>
+</div> 
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="sk-section sk-trends pdg-top--2x pdg-bottom--3x">
+	<div class="container container-blur container-blur--right">
+		<div class="row">
+			<div class="col-12 col-lg-9 sk-col">
+				<div class="sk-headings text-center text-lg-start">
+					<h2 class="sk-headings__title">Trend Alert ⭐</h2>
+					<div class="sk-headings__description"><p>If there is a trend you can be sure to find it below. </p></div>
+				</div>
+			</div>
+			<div class="col-12 sk-col">
+			<div class="sk-carousel sk-carousel--generic" data-type="trends">
+			<div class="sk-carousel__wrapper">
+			<div class="sk-carousel__swiper swiper swiper-initialized swiper-horizontal swiper-pointer-events swiper-autoheight swiper-watch-progress swiper-backface-hidden" data-mage-init='{"Swissup_Swiper/js/swiper" : {"lazy": true, "slidesPerView": 3, "freeMode": true, "loop": true, "autoplay": {"delay": 2500, "disableOnInteraction": false}, "spaceBetween": 20, "scrollbar":{ "el": ".swiper-scrollbar"}, "navigation": {"nextEl": ".swiper-button-next", "prevEl": ".swiper-button-prev"}, "breakpoints": {"768": {"slidesPerView": 3}, "600": {"slidesPerView": 2}, "480": {"slidesPerView": 1}}}}'>
+			<div class="swiper-wrapper" style="height: auto;">
+			<div class="swiper-slide">
+				<div class="trend__item">
+					<div class="trend__wrapper">
+					<div class="trend__image">
+						<div class="sk-media">
+							<a href="<?php echo $base_url.'eyeglasses/transparent.html'; ?>" class="trend__link">
+							<img class="sk-media__image sk-lazyload swiper-lazy swiper-lazy-loaded" loading="lazy" alt="img_2610" src="<?php echo $this->getUrl('pub/media/webp/').'transparent.webp'; ?>">
+							</a>
+						</div>
+					</div>
+					<div class="trend__area"></div>
+					</div>
+					<div class="trend__details">
+						<a href="<?php echo $base_url.'eyeglasses/transparent.html'; ?>" class="trend__link">
+							<h2 class="trend__title">Transparent Eyeglass</h2>
+							<span class="svg-data trend__icon">
+							<svg viewBox="0 0 27 29" xmlns="http://www.w3.org/2000/svg">
+							<path d="M2.6 12.459c0-4.885 3.975-8.86 8.86-8.86s8.859 3.975 8.859 8.86c0 2.434-.987 4.641-2.582 6.244-.006.006-.014.007-.02.013-.006.006-.007.014-.013.02-1.603 1.595-3.81 2.582-6.244 2.582-4.885 0-8.86-3.974-8.86-8.859M25.473 25.34l-6.082-6.082c1.571-1.83 2.528-4.203 2.528-6.799C21.919 6.691 17.227 2 11.46 2 5.692 2 1 6.691 1 12.459c0 5.767 4.692 10.459 10.46 10.459 2.596 0 4.969-.956 6.799-2.528l6.082 6.082c.156.156.362.234.566.234.205 0 .41-.078.566-.234.312-.312.312-.819 0-1.132" fill="#FFF" fill-rule="evenodd"></path>
+							</svg></span>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="swiper-slide">
+				<div class="trend__item">
+					<div class="trend__wrapper">
+						<div class="trend__image">
+							<div class="sk-media">
+								<a href="<?php echo $base_url.'eyeglasses/shape/cat-eye.html'; ?>" class="trend__link">
+								<img class="sk-media__image sk-lazyload swiper-lazy swiper-lazy-loaded" loading="lazy" alt="img_2597" src="<?php echo $this->getUrl('pub/media/webp/').'cateye.webp'; ?>">
+								</a>
+							</div>
+						</div>
+						<div class="trend__area">
+						<span class="trend__pin quick-view-js" style="left:57.7778%; top:48.8889%;" data-product="470977"></span>
+						</div>
+					</div>
+					<div class="trend__details">
+						<a href="<?php echo $base_url.'eyeglasses/shape/cat-eye.html'; ?>" class="trend__link">
+						<h2 class="trend__title">Cat Eye Eyeglasses</h2>
+						<span class="svg-data trend__icon">
+						<svg viewBox="0 0 27 29" xmlns="http://www.w3.org/2000/svg">
+						<path d="M2.6 12.459c0-4.885 3.975-8.86 8.86-8.86s8.859 3.975 8.859 8.86c0 2.434-.987 4.641-2.582 6.244-.006.006-.014.007-.02.013-.006.006-.007.014-.013.02-1.603 1.595-3.81 2.582-6.244 2.582-4.885 0-8.86-3.974-8.86-8.859M25.473 25.34l-6.082-6.082c1.571-1.83 2.528-4.203 2.528-6.799C21.919 6.691 17.227 2 11.46 2 5.692 2 1 6.691 1 12.459c0 5.767 4.692 10.459 10.46 10.459 2.596 0 4.969-.956 6.799-2.528l6.082 6.082c.156.156.362.234.566.234.205 0 .41-.078.566-.234.312-.312.312-.819 0-1.132" fill="#FFF" fill-rule="evenodd"></path>
+						</svg></span>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="swiper-slide">
+				<div class="trend__item">
+					<div class="trend__wrapper">
+						<div class="trend__image">
+							<div class="sk-media">
+								<a href="<?php echo $base_url.'eyeglasses/shape/round.html'; ?>" class="trend__link">
+								<img class="sk-media__image sk-lazyload swiper-lazy swiper-lazy-loaded" loading="lazy" alt="img_2597" src="<?php echo $this->getUrl('pub/media/webp/').'round.webp'; ?>">
+								</a>
+							</div>
+						</div>
+						<div class="trend__area">
+						<span class="trend__pin quick-view-js" style="left:57.7778%; top:48.8889%;" data-product="470977"></span>
+						</div>
+					</div>
+					<div class="trend__details">
+						<a href="<?php echo $base_url.'eyeglasses/shape/round.html'; ?>" class="trend__link">
+						<h2 class="trend__title">Round Eyeglasses</h2>
+						<span class="svg-data trend__icon">
+						<svg viewBox="0 0 27 29" xmlns="http://www.w3.org/2000/svg">
+						<path d="M2.6 12.459c0-4.885 3.975-8.86 8.86-8.86s8.859 3.975 8.859 8.86c0 2.434-.987 4.641-2.582 6.244-.006.006-.014.007-.02.013-.006.006-.007.014-.013.02-1.603 1.595-3.81 2.582-6.244 2.582-4.885 0-8.86-3.974-8.86-8.859M25.473 25.34l-6.082-6.082c1.571-1.83 2.528-4.203 2.528-6.799C21.919 6.691 17.227 2 11.46 2 5.692 2 1 6.691 1 12.459c0 5.767 4.692 10.459 10.46 10.459 2.596 0 4.969-.956 6.799-2.528l6.082 6.082c.156.156.362.234.566.234.205 0 .41-.078.566-.234.312-.312.312-.819 0-1.132" fill="#FFF" fill-rule="evenodd"></path>
+						</svg></span>
+						</a>
+					</div>
+				</div>
+			</div>
+			</div>
+			<div class="swiper-scrollbar swiper-scrollbar-horizontal">
+				<div class="swiper-scrollbar-drag" ></div>
+			</div>
+			<?php /* <div class="sk-carousel__cta text-center">
+				<a class="sk-btn sk-btn--primary" href="<?php echo $base_url.'eyeglasses/transparent.html'; ?>" title="Scopri tutti i trend">
+				<span class="sk-btn__ripple"><span class="sk-btn__ripple--circle"></span></span>
+				<span class="sk-btn__label">View More</span>
+				</a>
+			</div> */ ?>
+			<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+		</div></div>
+		<div class="swiper-navigation swiper-navigation--top">
+			<div class="swiper-button-prev swiper-arrow">
+				<span class="svg-data">
+					<svg viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+					<path stroke="#9A56FB" d="M17.8402 22.6803 8 12.8401 17.8402 3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+					</svg>
+				</span>
+			</div>
+			<div class="swiper-button-next swiper-arrow">
+				<span class="svg-data">
+					<svg viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+					<path stroke="#9A56FB" d="m8 3 9.8402 9.8402L8 22.6803" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+					</svg>
+				</span>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+</div>

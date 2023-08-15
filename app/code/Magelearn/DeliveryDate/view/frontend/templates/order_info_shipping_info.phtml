@@ -1,0 +1,81 @@
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<div class="prescription-container margin-t10 display-flex flex-wrap">
+				<div class="prescription-item">
+					<div class="my-prescription">
+						<h2 class="title margin-b10">Your Added eyepower</h2>
+					</div>				
+					<div class="power-content">
+						<div class="add-power-tabel add-power-column power-colmn-five">
+							<div class="power-submit-panel text-uppercase">
+								<div class="power-submit-head heading">Eye</div>
+								<div class="power-submit-head heading">Right Eye</div>
+								<div class="power-submit-head heading">Left Eye</div>
+							</div>
+							<div class="power-block power-submit-panel power-submit-defadivt">
+								<div class="parent-list">
+									<div class="power-submit-head heading text-uppercase">Spherical</div>
+									<div class="parent-list-item">
+										<?= $block->getSphRight() ?>
+									</div>
+									<div class="parent-list-item">
+										<?= $block->getSphLeft() ?>
+									</div>
+								</div>
+							</div>
+							<div class="power-block power-submit-panel power-submit-defadivt">
+								<div class="parent-list">
+									<div class="power-submit-head heading text-uppercase">Cylindrical</div>
+									<div class="parent-list-item">
+										<?= $block->getCylRight() ?>
+									</div>
+									<div class="parent-list-item">
+										<?= $block->getCylLeft() ?>
+									</div>
+								</div>
+							</div>
+							<div class="power-block power-submit-panel power-submit-defadivt">
+								<div class="parent-list">
+									<div class="power-submit-head heading text-uppercase">Axis</div>
+									<div class="parent-list-item">
+										<?= $block->getAxisRight() ?>
+									</div>
+									<div class="parent-list-item">
+										<?= $block->getAxisLeft() ?>
+									</div>
+								</div>
+							</div>
+							<div class="power-block power-submit-panel power-submit-defadivt">
+								<div class="parent-list">
+									<div class="power-submit-head heading text-uppercase">Ap</div>
+									<div class="parent-list-item">
+										<?= $block->getAdRight() ?>
+									</div>
+									<div class="parent-list-item">
+										<?= $block->getAdLeft() ?>
+									</div>
+								</div>
+							</div>							
+						</div>						
+					</div>
+				</div>
+				<div class="prescription-item">
+					<div class="my-prescription">
+						<h2 class="title margin-b10">Prescription File</h2>
+					</div>
+					<div class="power-content">
+						<div class="submit-calling margin-t10">							
+							<div class="file-uploader-meta"><img src="<?php echo $block->getMediaUrl($block->getPrescriptionFile()); ?>" ></div>
+						</div>
+					</div>
+
+				</div>	
+			</div>
+					</div>
+	</div>
+</div>
+
+
+
+

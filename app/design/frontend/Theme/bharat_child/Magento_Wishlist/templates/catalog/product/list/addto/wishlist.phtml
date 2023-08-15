@@ -1,0 +1,37 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var Magento\Wishlist\Block\Catalog\Product\ProductList\Item\AddTo\Wishlist $block */
+?>
+    
+
+
+<?php if ($block->getWishlistHelper()->isAllow()) : ?>
+<div class="sk-product__head">
+	<?php $_product = $block->getProduct();
+		$amount = $_product->getPrice() - $_product->getFinalPrice();
+	  $price = ($amount*100) / $_product->getPrice();
+	  $percentage = number_format($price, 0);
+	if($percentage > 0 ) {
+	?>
+	<div class="sk-product__badges">
+		<div class="badge badge__sales">
+			<span class="badge__label"><?php echo $percentage.'% Off'; ?></span>
+		</div>
+		<!--<div class="badge badge__top"><span class="badge__label">Top</span></div>-->
+	</div>
+	<?php } ?>
+	<div class="sk-product__wishlist sk-ajax_add_to_wishlist_button">
+		<a href="#" class="action towishlist" title="<?= $block->escapeHtmlAttr(__('Add to Wish List')) ?>" aria-label="<?= $block->escapeHtmlAttr(__('Add to Wish List')) ?>" data-post='<?= /* @noEscape */ $block->getAddToWishlistParams($block->getProduct()) ?>' data-action="add-to-wishlist" role="button">
+			<span class="svg-data sk-product__wishlist--icon">
+				<svg viewBox="0 0 33 29" xmlns="http://www.w3.org/2000/svg">
+				<path d="M16.905 27.8831a.7597.7597 0 0 1-.8096 0h-.0001c-.1807-.1142-4.4712-2.8451-8.4615-6.7898-2.3653-2.3385-4.1246-4.6167-5.229-6.7714C.9793 11.5402.6366 8.9467 1.3865 6.6133c.4893-1.5843 1.513-3.0155 2.88-4.022C5.6804 1.5504 7.3666 1 9.1425 1c3.413 0 5.4237 2.047 7.3582 4.0434C18.458 3.0325 20.5066 1 23.8577 1c1.776 0 3.4622.5503 4.8762 1.5914 1.3659 1.0056 2.3888 2.4353 2.881 4.0258.7482 2.3323.4052 4.9246-1.0196 7.7047-1.1042 2.1548-2.8635 4.433-5.2288 6.7714-3.9902 3.9447-8.2807 6.6756-8.4614 6.7898Z" stroke="#000" stroke-width="2" fill="none"></path>
+				</svg>
+			</span>
+		</a>
+	</div>
+</div>
+<?php endif; ?>

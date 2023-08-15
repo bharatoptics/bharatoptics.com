@@ -1,0 +1,290 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ *  General template for displaying group of blocks divided into sections
+ */
+
+$group = $block->getGroupName();
+$groupCss = $block->getGroupCss();
+/* $base_url = 'https://phplaravel-783214-2670440.cloudwaysapps.com/'; */
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$base_url = $storeManager->getStore()->getBaseUrl();
+
+
+$category = $objectManager->get('Magento\Framework\Registry')->registry('current_category');//get current category 
+$catId = 2; /* $category->getId(); */
+$subcategory = $objectManager->create('Magento\Catalog\Model\Category')->load($catId);
+$cats = $subcategory->getChildrenCategories();
+$categoryHelper = $this->getCategoryHelper();
+
+?>
+
+<?php /*if ($detailedInfoGroup = $block->getGroupChildNames($group)):?>
+    <div class="sections <?= $block->escapeHtmlAttr($groupCss) ?>">
+        <?php $layout = $block->getLayout(); ?>
+        <div class="section-items <?= $block->escapeHtmlAttr($groupCss) ?>-items"
+             data-mage-init='{"tabs":{"openedState":"active"}}'>
+            <?php foreach ($detailedInfoGroup as $name):?>
+                <?php
+                    $html = $layout->renderElement($name);
+                if (!($html !== null && trim($html)) && ($block->getUseForce() != true)) {
+                    continue;
+                }
+                    $alias = $layout->getElementAlias($name);
+                    $label = $block->getChildData($alias, 'title');
+                ?>
+                <div class="section-item-title <?= $block->escapeHtmlAttr($groupCss) ?>-item-title"
+                     data-role="collapsible">
+                    <a class="<?= $block->escapeHtmlAttr($groupCss) ?>-item-switch"
+                       data-toggle="switch" href="#<?= $block->escapeHtmlAttr($alias) ?>">
+                        <?= /* @noEscape * / $label ?>
+                    </a>
+                </div>
+                <div class="section-item-content <?= $block->escapeHtmlAttr($groupCss) ?>-item-content"
+                     id="<?= $block->escapeHtmlAttr($alias) ?>"
+                     data-role="content">
+                    <?= /* @noEscape * / $html ?>
+                </div>
+            <?php endforeach;?>
+        </div>
+    </div>
+<?php endif; */ ?>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-520LH2ZQNT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-520LH2ZQNT');
+</script>
+<div class="sk-header-mobile__overlay" style="opacity: 0; visibility: hidden;"></div>
+<div class="sk-header-mobile" style="opacity: 0; visibility: hidden; transform: translate(-360px);">
+<div class="sk-header-mobile__wrapper">
+	<div class="sk-header-mobile__opts">
+	<div class="sk-header__account">
+			<a href="<?php echo $base_url; ?>customer/account" title="Account" class="sk-header__opts--icon "><!--customer-login-link-->
+				<span class="svg-data sk-header__account--icon">
+					<svg viewBox="0 0 27 29" xmlns="http://www.w3.org/2000/svg">
+					<path d="M2.5833 26.086c.25-5.901 5.115-10.628 11.076-10.628s10.826 4.727 11.076 10.628H2.5833Zm6.628-16.857c0-2.563 2.085-4.648 4.648-4.648 2.563 0 4.647 2.085 4.647 4.648 0 2.562-2.084 4.647-4.647 4.647s-4.648-2.085-4.648-4.647Zm17.106 16.857c-.205-5.517-3.941-10.145-9.012-11.673 1.676-1.117 2.783-3.023 2.783-5.184 0-3.435-2.794-6.229-6.229-6.229s-6.229 2.794-6.229 6.229c0 2.115 1.061 3.984 2.677 5.11-5.218 1.436-9.097 6.126-9.306 11.747-.002.075-.002.35.002.658.006.512.424.923.936.923h23.44c.512 0 .93-.411.937-.923.004-.308.0028-.583.001-.658Z" fill="#FFF" fill-rule="evenodd"></path>
+					</svg>
+				</span>
+			</a>
+		</div>
+	<div class="sk-header__wishlist">
+		<a href="<?php echo $base_url; ?>wishlist" title="Wishlist" class="sk-header__opts--icon">
+			<span class="svg-data sk-header__wishlist--icon">
+				<svg viewBox="0 0 33 29" xmlns="http://www.w3.org/2000/svg">
+				<path d="M16.905 27.8831a.7597.7597 0 0 1-.8096 0h-.0001c-.1807-.1142-4.4712-2.8451-8.4615-6.7898-2.3653-2.3385-4.1246-4.6167-5.229-6.7714C.9793 11.5402.6366 8.9467 1.3865 6.6133c.4893-1.5843 1.513-3.0155 2.88-4.022C5.6804 1.5504 7.3666 1 9.1425 1c3.413 0 5.4237 2.047 7.3582 4.0434C18.458 3.0325 20.5066 1 23.8577 1c1.776 0 3.4622.5503 4.8762 1.5914 1.3659 1.0056 2.3888 2.4353 2.881 4.0258.7482 2.3323.4052 4.9246-1.0196 7.7047-1.1042 2.1548-2.8635 4.433-5.2288 6.7714-3.9902 3.9447-8.2807 6.6756-8.4614 6.7898Z" stroke="#000" stroke-width="2" fill="none"></path>
+				</svg>
+			</span>
+		<span class="wishlist--count"></span>
+		</a>
+	</div>
+	<div class="sk-header__burger sk-header__burger--close">
+		<span class="lines"></span>
+	</div>
+	</div>
+	
+	<div class="sk-header-mobile__row">
+		<div class="sk-header-mobile__nav">
+			<ul class="sf-menu" data-depth="0">
+			<!--<li class="depth-0 has-ul menu-item menu-item-has-children2">
+				<a href="#" class="menu-item__link" data-menu="611" style="opacity: 1; visibility: inherit; transform: translate(0px);">
+					<span class="menu-item-icon">
+						<img class="sk-lazyload sk-lazyload__img entered loaded is--loaded"  alt="Sunglass" src="/all_shoes_icon.png">
+					</span>
+					<span class="menu-item__label">Sunglass
+						<span class="svg-data menu-item-arrow">
+							<svg viewBox="0 0 9 15" xmlns="http://www.w3.org/2000/svg">
+							<path d="M7.7828.6587 1 7.4415l7 7" stroke="#000000" fill="none" fill-rule="evenodd"></path>
+							</svg>
+						</span>
+					</span>
+				</a>
+				<!--<ul class="sf-sub-menu second-menu sub-js-menu" style="display: none; opacity: 0; visibility: hidden;">
+					<li class="menu-item menu-item-back">
+					<a href="#" class="menu-item__link" style="opacity: 0; visibility: hidden; transform: translate(100%);">
+					<span class="menu-item__label">
+					<span class="svg-data menu-item-arrow">
+					<svg viewBox="0 0 9 15" xmlns="http://www.w3.org/2000/svg">
+					<path d="M7.7828.6587 1 7.4415l7 7" stroke="#000000" fill="none" fill-rule="evenodd"></path>
+					</svg></span>
+					Indietro
+					</span>
+					</a></li><li class="depth-1 menu-item-icon--circle menu-item"><a href="https://www.sublimeshop.it/negozio/" class="menu-item__link" style="opacity: 0; visibility: hidden; transform: translate(100%);"><span class="menu-item-icon"><img class="sk-lazyload sk-lazyload__img" loading="lazy" data-src="https://www.sublimeshop.it/wp-content/uploads/2022/07/tutte-le-scarpe-90x90.jpg" alt="Tutte"></span><span class="menu-item__label">Tutte</span></a></li><li class="depth-1 menu-item-icon--circle menu-item"><a href="https://www.sublimeshop.it/categoria-prodotto/stivali-e-stivaletti/" class="menu-item__link" style="opacity: 0; visibility: hidden; transform: translate(100%);"><span class="menu-item-icon"><img class="sk-lazyload sk-lazyload__img" loading="lazy" data-src="https://www.sublimeshop.it/wp-content/uploads/2022/07/Stivali-90x90.jpg" alt="Stivali e Stivaletti"></span><span class="menu-item__label">Stivali e Stivaletti</span></a></li><li class="depth-1 menu-item-icon--circle menu-item"><a href="https://www.sublimeshop.it/categoria-prodotto/texani/" class="menu-item__link" style="opacity: 0; visibility: hidden; transform: translate(100%);"><span class="menu-item-icon"><img class="sk-lazyload sk-lazyload__img" loading="lazy" data-src="https://www.sublimeshop.it/wp-content/uploads/2022/09/texani-90x90.png" alt="Texani"></span><span class="menu-item__label">Texani</span></a></li><li class="depth-1 menu-item-icon--circle menu-item"><a href="https://www.sublimeshop.it/categoria-prodotto/mocassini/" class="menu-item__link" style="opacity: 0; visibility: hidden; transform: translate(100%);"><span class="menu-item-icon"><img class="sk-lazyload sk-lazyload__img" loading="lazy" data-src="https://www.sublimeshop.it/wp-content/uploads/2022/09/Mocassini-90x90.jpg" alt="Mocassini"></span><span class="menu-item__label">Mocassini</span></a></li><li class="depth-1 menu-item-icon--circle menu-item"><a href="https://www.sublimeshop.it/categoria-prodotto/pumps/" class="menu-item__link" style="opacity: 0; visibility: hidden; transform: translate(100%);"><span class="menu-item-icon"><img class="sk-lazyload sk-lazyload__img" loading="lazy" data-src="https://www.sublimeshop.it/wp-content/uploads/2022/07/Pumps-90x90.jpg" alt="Pumps"></span><span class="menu-item__label">Pumps</span></a></li><li class="depth-1 menu-item-icon--circle menu-item"><a href="https://www.sublimeshop.it/categoria-prodotto/platform/" class="menu-item__link" style="opacity: 0; visibility: hidden; transform: translate(100%);"><span class="menu-item-icon"><img class="sk-lazyload sk-lazyload__img" loading="lazy" data-src="https://www.sublimeshop.it/wp-content/uploads/2022/07/Platform-90x90.jpg" alt="Platform"></span><span class="menu-item__label">Platform</span></a></li><li class="depth-1 menu-item-icon--circle menu-item"><a href="https://www.sublimeshop.it/categoria-prodotto/sandali/" class="menu-item__link" style="opacity: 0; visibility: hidden; transform: translate(100%);"><span class="menu-item-icon"><img class="sk-lazyload sk-lazyload__img" loading="lazy" data-src="https://www.sublimeshop.it/wp-content/uploads/2022/07/Sandali-90x90.jpg" alt="Sandali"></span><span class="menu-item__label">Sandali</span></a></li><li class="depth-1 menu-item-icon--circle menu-item"><a href="https://www.sublimeshop.it/categoria-prodotto/espadrilles/" class="menu-item__link" style="opacity: 0; visibility: hidden; transform: translate(100%);"><span class="menu-item-icon"><img class="sk-lazyload sk-lazyload__img" loading="lazy" data-src="https://www.sublimeshop.it/wp-content/uploads/2022/07/Espadrilles-90x90.jpg" alt="Espadrilles"></span><span class="menu-item__label">Espadrilles</span></a></li><li class="depth-1 menu-item-icon--circle menu-item"><a href="https://www.sublimeshop.it/categoria-prodotto/sneakers-donna/" class="menu-item__link" style="opacity: 0; visibility: hidden; transform: translate(100%);"><span class="menu-item-icon"><img class="sk-lazyload sk-lazyload__img" loading="lazy" data-src="https://www.sublimeshop.it/wp-content/uploads/2022/07/Sneakers-90x90.jpg" alt="Sneakers"></span><span class="menu-item__label">Sneakers</span></a></li></ul>-- >
+					
+			</li>-->
+			<?php foreach($cats as $menu) { 
+			$menuitem = $objectManager->create('Magento\Catalog\Model\Category')->load($menu->getId());
+			$_outputhelper    = $this->helper('Magento\Catalog\Helper\Output');
+			$_imgHtml   = '';
+			if ($_imgUrl = $menuitem->getImageUrl()) {
+				$_imgHtml = '<img class="sk-lazyload sk-lazyload__img entered loaded is--loaded" src="' . $_imgUrl . '" alt="'.$menu->getName().'" />';
+				$_imgHtml = $_outputhelper->categoryAttribute($menuitem, $_imgHtml, 'image');
+				/* @escapeNotVerified */
+			}
+			?>
+			<li class="depth-0 menu-item">
+				<a href="<?php echo $menu->getRequestPath(); ?>" class="menu-item__link">
+				<span class="menu-item-icon">
+					<?php echo $_imgHtml; ?>
+				</span>
+				<span class="menu-item__label"><?php echo $menu->getName(); ?></span>
+				</a>
+			</li>
+			<?php } ?>
+			<li class="depth-0 menu-item">
+				<a href="<?php echo $base_url; ?>eyeglasses/sales.html" class="menu-item__link">
+				<span class="menu-item-icon">
+				<img class="sk-lazyload sk-lazyload__img entered loaded is--loaded"  src="<?php echo $block->getViewFileUrl('images/flash_icon.png'); ?>" alt="Flash Sales">
+				</span>
+				<span class="menu-item__label">Sale</span>
+				</a>
+			</li>
+			<li class="depth-0 menu-item">
+				<a href="<?php echo $base_url; ?>sunglasses/new-arrivals.html" class="menu-item__link">
+				<span class="menu-item-icon">
+					<img class="sk-lazyload sk-lazyload__img entered loaded is--loaded" alt="New Arivals" src="<?php echo $block->getViewFileUrl('images/stars_icon.png'); ?>">
+				</span>
+				<span class="menu-item__label">New Arivals</span>
+				</a>
+			</li>
+			<?php /* <li class="depth-0 menu-item">
+				<a href="#" class="menu-item__link" style="opacity: 1; visibility: inherit; transform: translate(0px);">
+					<span class="menu-item-icon">
+						<img class="sk-lazyload sk-lazyload__img entered loaded is--loaded" src="<?php echo $block->getViewFileUrl('images/fire_icon.png'); ?>" alt="Saldi"></span><span class="menu-item__label">Most Viewed</span>
+				</a>
+			</li> */ ?>
+			</ul>
+		</div>
+	</div>
+</div>
+</div>
+<header class="sk-header sk-header--site is--hc is--not-bottom is--pinned is--top " data-cats="open">
+	<div class="sk-hellobar">
+		<div class="hellobar__wrapper">
+			<div class="hellobar__item text-start">
+				<p class="hellobar__description">
+					100% Refund available | Online spectacles store india 
+				</p>
+			</div>
+			<div class="hellobar__item text-center">
+				<p class="hellobar__description">
+					Free Shipping on all order | Cash on delivery available
+				</p>
+			</div>
+			<div class="hellobar__item text-end"><p class="hellobar__description">
+				<a href="<?php echo $base_url; ?>contact" title="Contact us!"><strong>Contact us!</strong></a></p>
+			</div>
+		</div>
+	</div>
+	<div class="sk-header__wrapper sk-header__wrapper--top">
+		<div class="sk-header__content">
+			<div class="sk-header__burger sk-header__burger--open">
+				<span class="lines"></span>
+			</div>
+			<div class="sk-header__nav d-none d-lg-block">
+				<ul class="sf-menu">
+					<li class="depth-0 has-ul menu-item menu-item-has-children">
+						<a href="<?php echo $base_url; ?>eyeglasses/sales.html" class="menu-item__link" data-menu="200982">
+						<span class="menu-item-icon">
+							<img class="sk-lazyload sk-lazyload__img entered loaded is--loaded" alt="Sales" data-ll-status="loaded" src="<?php echo $block->getViewFileUrl('images/fire_icon.png'); ?>">
+						</span>
+						<span class="menu-item__label">Sales
+						<span class="svg-data menu-item-arrow">
+							<svg viewBox="0 0 9 15" xmlns="http://www.w3.org/2000/svg">
+							<path d="M7.7828.6587 1 7.4415l7 7" stroke="#000000" fill="none" fill-rule="evenodd"></path>
+							</svg>
+						</span>
+						</span>
+						</a>
+					</li>
+					
+					<li class="depth-0 new-arrivals menu-item">
+						<a href="<?php echo $base_url; ?>sunglasses/new-arrivals.html" class="menu-item__link">
+						<span class="menu-item-icon">
+							<img class="sk-lazyload sk-lazyload__img entered loaded is--loaded" loading="lazy" src="<?php echo $block->getViewFileUrl('images/stars_icon.png'); ?>" alt="New Arrivals">
+						</span>
+						<span class="menu-item__label">New Arrivals</span><span class="cat-counts">41</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="sk-header__logo">
+				<a href="<?php echo $base_url; ?>" title="Bharat Optics">
+					<img  src="<?php echo $this->getUrl('pub/media/logo/stores/1').'india-logo.webp'; ?>" alt="Bharat Optics">
+				</a>
+			</div>
+			<div class="sk-header__opts">
+				<div class="sk-header__search">
+						<a href="#" data-bs-toggle="modal" data-bs-target="#woo-search-products-modal" title="Search" class="sk-header__opts--icon">
+							<span class="svg-data sk-header__search--icon">
+								<svg viewBox="0 0 27 29" xmlns="http://www.w3.org/2000/svg">
+								<path d="M2.6 12.459c0-4.885 3.975-8.86 8.86-8.86s8.859 3.975 8.859 8.86c0 2.434-.987 4.641-2.582 6.244-.006.006-.014.007-.02.013-.006.006-.007.014-.013.02-1.603 1.595-3.81 2.582-6.244 2.582-4.885 0-8.86-3.974-8.86-8.859M25.473 25.34l-6.082-6.082c1.571-1.83 2.528-4.203 2.528-6.799C21.919 6.691 17.227 2 11.46 2 5.692 2 1 6.691 1 12.459c0 5.767 4.692 10.459 10.46 10.459 2.596 0 4.969-.956 6.799-2.528l6.082 6.082c.156.156.362.234.566.234.205 0 .41-.078.566-.234.312-.312.312-.819 0-1.132" fill="#FFF" fill-rule="evenodd"></path>
+								</svg>
+							</span>
+						</a>
+				</div>
+				<div class="sk-header__wishlist">
+							<a href="<?php echo $base_url; ?>wishlist" title="Wishlist" class="sk-header__opts--icon">
+							<span class="svg-data sk-header__wishlist--icon">
+							<svg viewBox="0 0 33 29" xmlns="http://www.w3.org/2000/svg">
+							<path d="M16.905 27.8831a.7597.7597 0 0 1-.8096 0h-.0001c-.1807-.1142-4.4712-2.8451-8.4615-6.7898-2.3653-2.3385-4.1246-4.6167-5.229-6.7714C.9793 11.5402.6366 8.9467 1.3865 6.6133c.4893-1.5843 1.513-3.0155 2.88-4.022C5.6804 1.5504 7.3666 1 9.1425 1c3.413 0 5.4237 2.047 7.3582 4.0434C18.458 3.0325 20.5066 1 23.8577 1c1.776 0 3.4622.5503 4.8762 1.5914 1.3659 1.0056 2.3888 2.4353 2.881 4.0258.7482 2.3323.4052 4.9246-1.0196 7.7047-1.1042 2.1548-2.8635 4.433-5.2288 6.7714-3.9902 3.9447-8.2807 6.6756-8.4614 6.7898Z" stroke="#000" stroke-width="2" fill="none"></path>
+							</svg>
+							</span>
+							<span class="wishlist--count"></span>
+							</a>
+				</div>
+				<div class="sk-header__account">
+						<a href="<?php echo $base_url; ?>customer/account" title="Account" class="sk-header__opts--icon"><!--customer-login-link-->
+							<span class="svg-data sk-header__account--icon">
+							<svg viewBox="0 0 27 29" xmlns="http://www.w3.org/2000/svg">
+							<path d="M2.5833 26.086c.25-5.901 5.115-10.628 11.076-10.628s10.826 4.727 11.076 10.628H2.5833Zm6.628-16.857c0-2.563 2.085-4.648 4.648-4.648 2.563 0 4.647 2.085 4.647 4.648 0 2.562-2.084 4.647-4.647 4.647s-4.648-2.085-4.648-4.647Zm17.106 16.857c-.205-5.517-3.941-10.145-9.012-11.673 1.676-1.117 2.783-3.023 2.783-5.184 0-3.435-2.794-6.229-6.229-6.229s-6.229 2.794-6.229 6.229c0 2.115 1.061 3.984 2.677 5.11-5.218 1.436-9.097 6.126-9.306 11.747-.002.075-.002.35.002.658.006.512.424.923.936.923h23.44c.512 0 .93-.411.937-.923.004-.308.0028-.583.001-.658Z" fill="#FFF" fill-rule="evenodd"></path>
+							</svg>
+							</span>
+						</a>
+				</div>
+				<?php  echo $this->getLayout()->createBlock('Magento\Checkout\Block\Cart\Sidebar')->setTemplate('Magento_Checkout::cart/minicart.phtml')->toHtml(); ?>
+			</div>
+		</div>
+	</div>
+	
+	<div class="sk-header__categories">
+		<div class="sk-carousel sk-carousel--generic" data-type="shop-categories">
+			<div data-mage-init='{"Swissup_Swiper/js/swiper" : {"lazy": true, "slidesPerView": 8, "freeMode": true, "loop": false, "autoplay": false, "navigation": {"nextEl": ".swiper-button-next", "prevEl": ".swiper-button-prev"}, "breakpoints": {"768": {"slidesPerView": 6}, "600": {"slidesPerView": 4}, "480": {"slidesPerView": 3}}}}' class="swiper-container sk-carousel__swiper swiper swiper-initialized swiper-horizontal swiper-pointer-events swiper-free-mode swiper-watch-progress swiper-backface-hidden">
+				<div class="swiper-wrapper" id="mobile_categories" aria-live="polite">
+					<?php foreach($cats as $menu) { 
+					$menuitem = $objectManager->create('Magento\Catalog\Model\Category')->load($menu->getId());
+					$_outputhelper    = $this->helper('Magento\Catalog\Helper\Output');
+					$_imgHtml   = '';
+					if ($_imgUrl = $menuitem->getImageUrl()) {
+						$_imgHtml = '<img class="sk-lazyload swiper-lazy swiper-lazy-loaded" src="' . $_imgUrl . '" alt="'.$menu->getName().'" />';
+						$_imgHtml = $_outputhelper->categoryAttribute($menuitem, $_imgHtml, 'image');
+						/* @escapeNotVerified */ 
+					}
+					?>
+					<div class="swiper-slide">
+						<a href="<?php echo $menu->getUrl(); ?>" class="cat__link current menu-item current-menu-item current_page_item" title="<?php echo $menu->getName(); ?>">
+							<div class="cat__media">
+								<?php echo $_imgHtml; ?>
+							</div>
+							<p class="cat__title truncate-text"><span><?php echo $menu->getName(); ?></span></p>
+						</a>
+					</div>
+					<?php } ?>
+					
+					
+				</div>
+			</div>
+			
+			
+		</div>
+	</div>
+</header>

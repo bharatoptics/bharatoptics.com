@@ -1,0 +1,78 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var $block \Magento\Checkout\Block\Cart\Sidebar */
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+?>
+
+<div data-block="minicart" class="sk-header__cart">
+    <a class="action showcart h-cart h-mini-cart sk-header__opts--icon" href="<?= $block->escapeUrl($block->getShoppingCartUrl()) ?>" data-bind="scope: 'minicart_content'">
+        <span class="svg-data sk-header__cart--icon">
+			<svg viewBox="0 0 27 29" xmlns="http://www.w3.org/2000/svg">
+			<g fill="none" fill-rule="evenodd">
+			<path class="path-cart" d="M22.3477 24.4283c0 .4489-.1.8147-.2972 1.0884-.2201.3056-.5436.467-.9356.467H5.2554c-.3916 0-.715-.1614-.9356-.467-.197-.2737-.2968-.6399-.2968-1.0884v-.0389c0-.0125.0007-.025.0026-.0372l1.9777-13.5796a.2263.2263 0 0 0 .0026-.0207l.0055-.0557a.3273.3273 0 0 0 .0013-.0178c.0484-.8713.6752-1.5537 1.4263-1.5537h1.8962v2.8322c0 .2348.1877.4248.4189.4248s.419-.19.419-.4248V9.1247h6.0246v2.8322c0 .2348.1877.4248.4189.4248s.4186-.19.4186-.4248V9.1247h1.8965c.7511 0 1.3776.6824 1.4263 1.5537a.2615.2615 0 0 0 .0013.0178l.0055.056a.436.436 0 0 0 .0023.0204l1.9725 13.5414.0055.0382a.2877.2877 0 0 1 .0026.0376v.0385ZM13.1853 3.6827c1.6611 0 3.0124 1.3703 3.0124 3.0547v1.5377H10.173V6.7374c0-1.6844 1.3513-3.0547 3.0123-3.0547Zm9.9882 20.545-1.976-13.5693-.004-.0373c-.0776-1.3163-1.0697-2.346-2.2618-2.346h-1.8965V6.7374c0-2.1527-1.727-3.904-3.8499-3.904-2.1228 0-3.8501 1.7513-3.8501 3.904v1.5377H7.439c-1.1925 0-2.1842 1.0297-2.2622 2.346l-.0035.0376L3.1969 24.228a1.1205 1.1205 0 0 0-.0117.1613v.0389c0 .6326.1542 1.1674.4585 1.5896.3787.5256.9512.8154 1.6117.8154H21.115c.6606 0 1.2331-.2898 1.6117-.8154.3043-.4222.4586-.957.4586-1.5896v-.0385c0-.0544-.004-.1087-.0117-.162Z" fill="#FFF"></path>
+			<path class="path-cart" d="M22.3477 24.4283c0 .4489-.1.8147-.2972 1.0884-.2201.3056-.5436.467-.9356.467H5.2554c-.3916 0-.715-.1614-.9356-.467-.197-.2737-.2968-.6399-.2968-1.0884v-.0389c0-.0125.0007-.025.0026-.0372l1.9777-13.5796a.2263.2263 0 0 0 .0026-.0207l.0055-.0557a.3273.3273 0 0 0 .0013-.0178c.0484-.8713.6752-1.5537 1.4263-1.5537h1.8962v2.8322c0 .2348.1877.4248.4189.4248s.419-.19.419-.4248V9.1247h6.0246v2.8322c0 .2348.1877.4248.4189.4248s.4186-.19.4186-.4248V9.1247h1.8965c.7511 0 1.3776.6824 1.4263 1.5537a.2615.2615 0 0 0 .0013.0178l.0055.056a.436.436 0 0 0 .0023.0204l1.9725 13.5414.0055.0382a.2877.2877 0 0 1 .0026.0376v.0385ZM13.1853 3.6827c1.6611 0 3.0124 1.3703 3.0124 3.0547v1.5377H10.173V6.7374c0-1.6844 1.3513-3.0547 3.0123-3.0547Zm9.9882 20.545-1.976-13.5693-.004-.0373c-.0776-1.3163-1.0697-2.346-2.2618-2.346h-1.8965V6.7374c0-2.1527-1.727-3.904-3.8499-3.904-2.1228 0-3.8501 1.7513-3.8501 3.904v1.5377H7.439c-1.1925 0-2.1842 1.0297-2.2622 2.346l-.0035.0376L3.1969 24.228a1.1205 1.1205 0 0 0-.0117.1613v.0389c0 .6326.1542 1.1674.4585 1.5896.3787.5256.9512.8154 1.6117.8154H21.115c.6606 0 1.2331-.2898 1.6117-.8154.3043-.4222.4586-.957.4586-1.5896v-.0385c0-.0544-.004-.1087-.0117-.162Z" stroke="#FFF" stroke-width=".75"></path>
+			</g>
+			</svg>
+		</span>
+		
+		<span class="h-mini-cart--count count_2 counted counter qty empty"
+              data-bind="css: { empty: !!getCartParam('summary_count') == false && !isLoading() },
+               blockLoader: isLoading">
+            <span class="counter-number">
+                <!-- ko if: getCartParam('summary_count') -->
+                <!-- ko text: getCartParam('summary_count').toLocaleString(window.LOCALE) --><!-- /ko -->
+                <!-- /ko -->
+            </span>
+           
+        </span>
+    </a>
+	<div class="sk-minicart__overlay" style="display: none; opacity: 0; visibility: hidden;"></div>
+    <?php if ($block->getIsNeedToDisplaySideBar()):?>
+        <div class="block block-minicart sk-minicart"
+             <?php /* data-role="dropdownDialog"
+             data-mage-init='{"dropdownDialog":{
+                "appendTo":"[data-block=minicart]",
+                "triggerTarget":".showcart",
+                "timeout": "2000",
+                "closeOnMouseLeave": false,
+                "closeOnEscape": true,
+                "triggerClass":"active",
+                "parentClass":"active",
+                "buttons":[]}}' */ ?> style="opacity: 0; visibility: hidden;">
+            <div id="minicart-content-wrapper" class="minicart__wrapper" data-bind="scope: 'minicart_content'">
+            <div  class="minicart__content" >
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            </div>
+            </div>
+            <?= $block->getChildHtml('minicart.addons') ?>
+        </div>
+    <?php else: ?>
+        <?php $scriptString = <<<script
+            require(['jquery'], function ($) {
+                $('a.action.showcart').on('click', function() {
+                    $(document.body).trigger('processStart');
+                });
+            });
+script;
+        ?>
+        <?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false); ?>
+    <?php endif ?>
+    <?= /* @noEscape */ $secureRenderer->renderTag('script', [], 'window.checkout = ' .
+     /* @noEscape */ $block->getSerializedConfig(), false); ?>
+    <script type="text/x-magento-init">
+    {
+        "[data-block='minicart']": {
+            "Magento_Ui/js/core/app": <?= /* @noEscape */ $block->getJsLayout() ?>
+        },
+        "*": {
+            "Magento_Ui/js/block-loader": "<?= $block->escapeJs(
+                $block->escapeUrl($block->getViewFileUrl('images/loader-1.gif'))
+            ) ?>"
+        }
+    }
+    </script>
+</div>

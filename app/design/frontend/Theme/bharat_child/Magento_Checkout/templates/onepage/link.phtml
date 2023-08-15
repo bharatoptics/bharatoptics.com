@@ -1,0 +1,31 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+use Magento\Checkout\Block\Onepage\Link;
+use Magento\Framework\Escaper;
+
+/**
+ * @var Link $block
+ * @var Escaper $escaper
+ */
+?>
+<?php if ($block->isPossibleOnepageCheckout()): ?>
+    <button type="button"
+            data-role="proceed-to-checkout"
+            title="<?= $escaper->escapeHtmlAttr(__('Proceed to Checkout')) ?>"
+            data-mage-init='{
+                "Magento_Checkout/js/proceed-to-checkout":{
+                    "checkoutUrl":"<?= $escaper->escapeJs($block->getCheckoutUrl()) ?>"
+                }
+            }'
+            class="single_add_to_cart_button sk-btn sk-btn--full sk-btn--primary sk-btn--pulse sk-add-to-cart-btn add-to-cart-js wc-variation-selection-needed  checkout<?= ($block->isDisabled()) ? ' disabled' : '' ?>"
+            <?php if ($block->isDisabled()): ?>
+                disabled="disabled"
+            <?php endif; ?>>
+		<span class="sk-btn__ripple"><span class="sk-btn__ripple--circle"></span></span>
+		<span class="sk-btn__label add"><?= $escaper->escapeHtml(__('Proceed to Checkout')) ?></span>
+	</button>
+<?php endif?>

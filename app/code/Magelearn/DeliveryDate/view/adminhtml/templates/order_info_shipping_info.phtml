@@ -1,0 +1,62 @@
+<section class="admin__page-section" id="delivery-date-content">
+    <div class="admin__page-section-title">
+        <span class="title"><?= $block->escapeHtml(__('Eye Power Information')) ?></span>
+    </div>
+	<div class="admin__page-section-content">
+		<div class="admin__page-section-item order-payment-method">
+			<div class="admin__page-section-item-title">
+				<span class="title"><?= __('Prescription File') ?></span>
+			</div>
+			<div class="admin__page-section-item-content">
+				<div class="admin__page-section-item-content">
+					<span class="price"><img src="<?php echo $block->getMediaUrl($block->getPrescriptionFile()); ?>" ></span>                        
+				</div>
+			</div>
+		</div>
+		<div class="admin__page-section-item order-shipping-method">
+			<div class="admin__page-section-item-title">
+				<span class="title"><?= __('Prescription') ?></span>
+			</div>
+			<div class="admin__page-section-item-content">
+				<strong><?= __('Spherical Right Eye') ?></strong>
+				<span class="price"><?= $block->getSphRight() ?></span>                        
+			</div>
+			<div class="admin__page-section-item-content">
+				<strong><?= __('Spherical Left Eye') ?></strong>
+				<span class="price"><?= $block->getSphLeft() ?></span>                        
+			</div>
+			<div class="admin__page-section-item-content">
+				<strong><?= __('Cylindrical Right Eye') ?></strong>
+				<span class="price"><?= $block->getCylRight() ?></span>                        
+			</div>
+			<div class="admin__page-section-item-content">
+				<strong><?= __('Cylindrical Left Eye') ?></strong>
+				<span class="price"><?= $block->getCylLeft() ?></span>                        
+			</div>
+			<div class="admin__page-section-item-content">
+				<strong><?= __('Axis Right Eye') ?></strong>
+				<span class="price"><?= $block->getAxisRight() ?></span>                        
+			</div>
+			<div class="admin__page-section-item-content">
+				<strong><?= __('Axis Left Eye') ?></strong>
+				<span class="price"><?= $block->getAxisLeft() ?></span>                        
+			</div>
+			<div class="admin__page-section-item-content">
+				<strong><?= __('Addition Right Eye') ?></strong>
+				<span class="price"><?= $block->getAdRight() ?></span>                        
+			</div>
+			<div class="admin__page-section-item-content">
+				<strong><?= __('Addition Left Eye') ?></strong>
+				<span class="price"><?= $block->getAdLeft() ?></span>                        
+			</div>	
+		</div>		
+	</div>
+</section>
+<script type="text/javascript">
+    require(
+        ['jquery'],
+        function($) {
+            $('#delivery-date-content').insertAfter($('.order-view-billing-shipping'));
+        }
+    );
+</script>

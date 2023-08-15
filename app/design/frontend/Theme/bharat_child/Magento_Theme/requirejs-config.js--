@@ -1,0 +1,12 @@
+var config = {
+    map: {
+        '*':{
+                headroom:'js/headroom.min.js',
+        	}
+        },
+    shim:{
+    		'headroom':{
+							     deps: ['jquery']
+						     }
+    	}
+};

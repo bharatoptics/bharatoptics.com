@@ -1,0 +1,499 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+use Magento\Framework\App\Action\Action;
+
+?>
+<?php
+/**
+ * Product list template
+ *
+ * @var $block \Magento\Catalog\Block\Product\ListProduct
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+?>
+<?php
+$_productCollection = $block->getLoadedProductCollection();
+/** @var \Magento\Catalog\Helper\Output $_helper */
+$_helper = $block->getData('outputHelper');
+?>
+<?php if (!$_productCollection->count()): ?>
+    <div class="message info empty">
+        <div><?= $escaper->escapeHtml(__('We can\'t find products matching the selection.')) ?></div>
+    </div>
+<?php else: ?>
+    <?= $block->getToolbarHtml() ?>
+    <?= $block->getAdditionalHtml() ?>
+    <?php
+    if ($block->getMode() === 'grid') {
+        $viewMode = 'grid';
+        $imageDisplayArea = 'category_page_grid';
+        $showDescription = false;
+        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+    } else {
+        $viewMode = 'list';
+        $imageDisplayArea = 'category_page_list';
+        $showDescription = true;
+        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::FULL_VIEW;
+    }
+    /**
+     * Position for actions regarding image size changing in vde if needed
+     */
+    $pos = $block->getPositioned();
+    ?>
+    <div class="products wrapper <?= /* @noEscape */ $viewMode ?> products-<?= /* @noEscape */ $viewMode ?>">
+        <ol class="products list items product-items">
+            <?php /** @var $_product \Magento\Catalog\Model\Product */ ?>
+            <?php foreach ($_productCollection as $_product): ?>
+            <li class="sk-product item product product-item">
+                <div class="product-item-info sk-product__item"
+                     id="product-item-info_<?= /* @noEscape */ $_product->getId() ?>"
+                     data-container="product-<?= /* @noEscape */ $viewMode ?>">
+					<div data-role="add-to-links" class="actions-secondary">
+                                    <?php if ($addToBlock = $block->getChildBlock('addto')): ?>
+                                        <?= $addToBlock->setProduct($_product)->getChildHtml() ?>
+                                    <?php endif; ?>
+                                </div>
+					<?php
+                    $productImage = $block->getImage($_product, $imageDisplayArea);
+                    if ($pos != null) {
+                        $position = 'left:' . $productImage->getWidth() . 'px;'
+                            . 'top:' . $productImage->getHeight() . 'px;';
+                    }
+                    ?>
+                    <?php // Product Image ?>
+                    <a href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>"
+                       class="product photo product-item-photo  sk-product__link"
+                       tabindex="-1">
+					<div class="sk-product__media">
+					<div class="sk-product__image" data-hover="yes">
+					<div class="sk-media">
+                        <?= $productImage->toHtml() ?>
+					</div>
+					</div>
+					</div>
+                    </a>
+					<?php /*<div class="product-item-inner">
+                            <div class="product actions product-item-actions">
+                                <div class="actions-primary">
+                                    <?php if ($_product->isSaleable()):?>
+                                        <?php $postParams = $block->getAddToCartPostParams($_product); ?>
+                                        <form data-role="tocart-form"
+                                              data-product-sku="<?= $escaper->escapeHtml($_product->getSku()) ?>"
+                                              action="<?= $escaper->escapeUrl($postParams['action']) ?>"
+                                              method="post">
+                                            <?php $options = $block->getData('viewModel')->getOptionsData($_product); ?>
+                                            <?php foreach ($options as $optionItem): ?>
+                                                <input type="hidden"
+                                                       name="<?= $escaper->escapeHtml($optionItem['name']) ?>"
+                                                       value="<?= $escaper->escapeHtml($optionItem['value']) ?>">
+                                            <?php endforeach; ?>
+                                            <input type="hidden"
+                                                   name="product"
+                                                   value="<?= / * @noEscape * / $postParams['data']['product'] ?>">
+                                            <input type="hidden"
+                                                   name="<?= / * @noEscape * / Action::PARAM_NAME_URL_ENCODED ?>"
+                                                   value="<?=
+                                                   / * @noEscape * / $postParams['data'][Action::PARAM_NAME_URL_ENCODED]
+                                                    ?>">
+                                            <?= $block->getBlockHtml('formkey') ?>
+											<button type="submit"
+                                                    title="<?= $escaper->escapeHtmlAttr(__('Add to Cart')) ?>"
+                                                    class="action tocart primary"
+                                                    disabled>
+                                            <div class="sk-product__quick-add quick-view-js">
+                                            <div class="quick-add__button">
+                                                <span class="quick-add__label"><?= $escaper->escapeHtml(__('Buy Now')) ?></span>
+												<span class="svg-data quick-add__icon">
+													<svg viewBox="0 0 27 29" xmlns="http://www.w3.org/2000/svg">
+													<g fill="none" fill-rule="evenodd">
+													<path class="path-cart" d="M22.3477 24.4283c0 .4489-.1.8147-.2972 1.0884-.2201.3056-.5436.467-.9356.467H5.2554c-.3916 0-.715-.1614-.9356-.467-.197-.2737-.2968-.6399-.2968-1.0884v-.0389c0-.0125.0007-.025.0026-.0372l1.9777-13.5796a.2263.2263 0 0 0 .0026-.0207l.0055-.0557a.3273.3273 0 0 0 .0013-.0178c.0484-.8713.6752-1.5537 1.4263-1.5537h1.8962v2.8322c0 .2348.1877.4248.4189.4248s.419-.19.419-.4248V9.1247h6.0246v2.8322c0 .2348.1877.4248.4189.4248s.4186-.19.4186-.4248V9.1247h1.8965c.7511 0 1.3776.6824 1.4263 1.5537a.2615.2615 0 0 0 .0013.0178l.0055.056a.436.436 0 0 0 .0023.0204l1.9725 13.5414.0055.0382a.2877.2877 0 0 1 .0026.0376v.0385ZM13.1853 3.6827c1.6611 0 3.0124 1.3703 3.0124 3.0547v1.5377H10.173V6.7374c0-1.6844 1.3513-3.0547 3.0123-3.0547Zm9.9882 20.545-1.976-13.5693-.004-.0373c-.0776-1.3163-1.0697-2.346-2.2618-2.346h-1.8965V6.7374c0-2.1527-1.727-3.904-3.8499-3.904-2.1228 0-3.8501 1.7513-3.8501 3.904v1.5377H7.439c-1.1925 0-2.1842 1.0297-2.2622 2.346l-.0035.0376L3.1969 24.228a1.1205 1.1205 0 0 0-.0117.1613v.0389c0 .6326.1542 1.1674.4585 1.5896.3787.5256.9512.8154 1.6117.8154H21.115c.6606 0 1.2331-.2898 1.6117-.8154.3043-.4222.4586-.957.4586-1.5896v-.0385c0-.0544-.004-.1087-.0117-.162Z" fill="#FFF"></path>
+													<path class="path-cart" d="M22.3477 24.4283c0 .4489-.1.8147-.2972 1.0884-.2201.3056-.5436.467-.9356.467H5.2554c-.3916 0-.715-.1614-.9356-.467-.197-.2737-.2968-.6399-.2968-1.0884v-.0389c0-.0125.0007-.025.0026-.0372l1.9777-13.5796a.2263.2263 0 0 0 .0026-.0207l.0055-.0557a.3273.3273 0 0 0 .0013-.0178c.0484-.8713.6752-1.5537 1.4263-1.5537h1.8962v2.8322c0 .2348.1877.4248.4189.4248s.419-.19.419-.4248V9.1247h6.0246v2.8322c0 .2348.1877.4248.4189.4248s.4186-.19.4186-.4248V9.1247h1.8965c.7511 0 1.3776.6824 1.4263 1.5537a.2615.2615 0 0 0 .0013.0178l.0055.056a.436.436 0 0 0 .0023.0204l1.9725 13.5414.0055.0382a.2877.2877 0 0 1 .0026.0376v.0385ZM13.1853 3.6827c1.6611 0 3.0124 1.3703 3.0124 3.0547v1.5377H10.173V6.7374c0-1.6844 1.3513-3.0547 3.0123-3.0547Zm9.9882 20.545-1.976-13.5693-.004-.0373c-.0776-1.3163-1.0697-2.346-2.2618-2.346h-1.8965V6.7374c0-2.1527-1.727-3.904-3.8499-3.904-2.1228 0-3.8501 1.7513-3.8501 3.904v1.5377H7.439c-1.1925 0-2.1842 1.0297-2.2622 2.346l-.0035.0376L3.1969 24.228a1.1205 1.1205 0 0 0-.0117.1613v.0389c0 .6326.1542 1.1674.4585 1.5896.3787.5256.9512.8154 1.6117.8154H21.115c.6606 0 1.2331-.2898 1.6117-.8154.3043-.4222.4586-.957.4586-1.5896v-.0385c0-.0544-.004-.1087-.0117-.162Z" stroke="#FFF" stroke-width=".75"></path>
+													</g>
+													</svg>
+												</span>
+												
+											</div>
+											</div>
+                                            </button>
+                                        </form>
+                                    <?php else:?>
+                                        <?php if ($_product->isAvailable()):?>
+                                            <div class="stock available">
+                                                <span><?= $escaper->escapeHtml(__('In stock')) ?></span></div>
+                                        <?php else:?>
+                                            <div class="stock unavailable">
+                                                <span><?= $escaper->escapeHtml(__('Out of stock')) ?></span></div>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                </div>
+                                <?= ($pos && strpos($pos, $viewMode . '-primary')) ?
+                                    / * @noEscape * / $secureRenderer->renderStyleAsTag(
+                                        $position,
+                                        'product-item-info_' . $_product->getId() . ' div.actions-primary'
+                                    ) : '' ?>
+                                
+                                <?= ($pos && strpos($pos, $viewMode . '-secondary')) ?
+                                    / * @noEscape * / $secureRenderer->renderStyleAsTag(
+                                        $position,
+                                        'product-item-info_' . $_product->getId() . ' div.actions-secondary'
+                                    ) : '' ?>
+                            </div>
+                            <?php /*if ($showDescription): ?>
+                                <div class="product description product-item-description">
+                                    <?= /* @noEscape * / $_helper->productAttribute(
+                                        $_product,
+                                        $_product->getShortDescription(),
+                                        'short_description'
+                                    ) ?>
+                                    <a href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>"
+                                       title="<?= /* @noEscape * / $_productNameStripped ?>"
+                                       class="action more"><?= $escaper->escapeHtml(__('Learn More')) ?></a>
+                                </div>
+                            <?php endif; * / ?>
+                        </div> */ ?>
+                    <div class="product details product-item-details">
+                        <?php $_productNameStripped = $block->stripTags($_product->getName(), null, true); ?>
+                        <strong class="product name product-item-name">
+                            <a class="product-item-link sk-product__title truncate-text"
+                               href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>">
+                                <?=/* @noEscape */ $_helper->productAttribute($_product, $_product->getName(), 'name')?>
+                            </a>
+                        </strong>
+                        <?= $block->getReviewsSummaryHtml($_product, $templateType) ?>
+                        <?= /* @noEscape */ $block->getProductPrice($_product) ?>
+
+                        <?= $block->getProductDetailsHtml($_product) ?>
+                    </div>
+                </div>
+                <?= ($pos && strpos($pos, $viewMode . '-actions')) ?
+                /* @noEscape */ $secureRenderer->renderStyleAsTag(
+                    $position,
+                    'product-item-info_' . $_product->getId() . ' div.product-item-actions'
+                ) : '' ?>
+            </li>
+            <?php endforeach; ?>
+        </ol>
+    </div>
+    <?= $block->getChildBlock('toolbar')->setIsBottom(true)->toHtml() ?>
+    <?php // phpcs:ignore Magento2.Legacy.PhtmlTemplate ?>
+    <script type="text/x-magento-init">
+    {
+        "[data-role=tocart-form], .form.map.checkout": {
+            "catalogAddToCart": {
+                "product_sku": "<?= $escaper->escapeJs($_product->getSku()) ?>"
+            }
+        }
+    }
+    </script>
+<?php endif; ?>
+
+
+<div class="category-description">
+    
+    <div id="seoaccordian" class="TabsWrapper" role="tablist">
+   <div data-role="collapsible" class="tabWrapperdiv allow" role="tab" data-collapsible="true" aria-selected="false" aria-expanded="false">
+      <div data-role="trigger" tabindex="-1">
+         <h2>Choose And Find The Best Eyeglass Frames</h2>
+      </div>
+   </div>
+   <div data-role="content" class="TabBodyContent allow" role="tabpanel" aria-hidden="true" style="display: none;">
+      <p>Eyeglasses have come a long way over the years. From making a person look downright nerdy or geeky, they now
+         come in such stylish designs, that they even help add a refreshing touch to your look and appeal. From
+         different kinds of frame shapes to exciting colours and embellishments, eyeglasses are no less interesting than
+         sunglasses now. That is why many of you wish to own more than one pair of
+               glasses to sport distinct looks each time!</p>
+   </div>
+
+
+   <div data-role="collapsible" class="tabWrapperdiv allow" role="tab" data-collapsible="true" aria-selected="false" aria-expanded="false">
+      <div data-role="trigger" tabindex="-1">
+         <h2>Latest Spectacle Frames</h2>
+      </div>
+   </div>
+
+   <div data-role="content" class="TabBodyContent allow" role="tabpanel" aria-hidden="true" style="display: none;">
+      <p>Just like <a title="sunglasses" href="https://www.bharatoptics.com/sunglasses.html" target="_blank" rel="noopener noreferrer">sunglasses</a>, eyeglass category too keeps seeing new trends from time to time.
+         With a diverse range of spectacle frames such as that in cat eye style, wayfarers, round shape, and aviators,
+         choosing best eyeglass frames can be a challenging task. Besides that, several brands are selling <strong>best
+            eyeglasses in India</strong> in terms of variety and premium quality.</p>
+   </div>
+   <div data-role="collapsible" class="tabWrapperdiv allow" role="tab" data-collapsible="true" aria-selected="false" aria-expanded="false">
+      <div data-role="trigger" tabindex="0">
+         <h2>Try Online Glasses Shopping</h2>
+      </div>
+   </div>
+   <div data-role="content" class="TabBodyContent allow" role="tabpanel" aria-hidden="true" style="display: none;">
+      <p>One of the best ways to check the range of the <a title="eyeglasses brands" href="https://www.bharatoptics.com/eyeglasses.html"><strong> best eyeglasses brands</strong></a> in India is to browse
+         online. We at Bharat Optics bring together a range of best eyewear brands in India to offer you a vast
+         collection of spectacle styles. You can either visit us at our stores or order online through our website. If
+         you buy online, then we will deliver your selected <strong>pair of glasses</strong> to your doorstep, and offer
+         you dedicated after-sales services. Choose the best eyeglasses and sport the bespectacled look in style!</p>
+   </div>
+   <div data-role="collapsible" class="tabWrapperdiv allow" role="tab" data-collapsible="true" aria-selected="false" aria-expanded="false">
+      <div data-role="trigger" tabindex="-1">
+         <h2>Types Of Eyeglasses</h2>
+         <p></p>
+      </div>
+   </div>
+   <div data-role="content" class="TabBodyContent allow" role="tabpanel" aria-hidden="true" style="display: none;">
+     
+      <ul>
+         <li><strong>Rimmed Eyeglasses</strong></li>
+      </ul>
+      <p>Rimmed Eyeglasses come fitted with lenses entirely outlined by a plastic or metal frame. Nothing catches
+         attention like sporting a stylish bodied frame!</p>
+      <ul>
+         <li><strong>Rimless Eyeglasses</strong></li>
+      </ul>
+      <p>Lightweight and sombre, rimless eyeglasses add a minimalistic touch to your face. Go for aviator
+         frames or round, and you get a distinctive look altogether!</p>
+      <ul>
+         <li><strong>Semi-Rimmed Eyeglasses</strong></li>
+      </ul>
+      <p>Emphasize the upper portion of your eyes by wearing semi-rimmed eyeglasses. It helps in building a
+         sophisticated look.</p>
+      <ul>
+         <li><strong>Aviator Eyeglasses</strong></li>
+      </ul>
+      <p>One of the most sought-after styles, aviator glasses, carry a classy appeal. Manage a bold look every day with
+         the iconic aviator eyeglass frames.</p>
+      <ul>
+         <li><strong>Clubmaster Eyeglasses</strong></li>
+      </ul>
+      <p>Clubmaster eyeglasses are an ideal choice if you want to solidify your style statement! They perfectly complement both casual and
+         work attire.</p>
+      <ul>
+         <li><strong>Rectangular Eyeglasses</strong></li>
+      </ul>
+      <p><a href="https://www.bharatoptics.com/eyeglasses/shape/rectangle.html" target="_blank" rel="noopener noreferrer">Rectangular eyeglasses</a> make for the safest choice as they mostly suit all face
+         types. Oversized ones are trending nowadays and can help you ace the bespectacled look!</p>
+      <ul>
+         <li><strong>Wayfarer Eyeglasses</strong></li>
+      </ul>
+      <p><a href="https://www.bharatoptics.com/eyeglasses/shape/wayfarer.html" target="_blank" rel="noopener noreferrer">Wayfarer eyeglasses</a> carry a unique vibe and can help add a vibrant touch to
+         your personality. Look confident all the time by sporting such a style.</p>
+      <ul>
+         <li><strong>Round Eyeglasses</strong></li>
+      </ul>
+      <p>Choose <a href="https://www.bharatoptics.com/eyeglasses/shape/round.html" target="_blank" rel="noopener noreferrer">round eyeglasses</a> if you want to bring out your artistic and expressive side.
+         The circular frame helps you create a personal image.</p>
+      <ul>
+         <li><strong>Oval Eyeglasses</strong></li>
+      </ul>
+      <p>Experiment with new well-defined looks with <a href="https://www.bharatoptics.com/eyeglasses/shape/oval.html" target="_blank" rel="noopener noreferrer">oval eyeglasses</a>. They are the ideal choice for bringing
+         fashion to your workplace.</p>
+      <ul>
+         <li><strong>Cat-Eye Glasses</strong></li>
+      </ul>
+      <p><a href="https://www.bharatoptics.com/women-eyeglasses.html?frame_shape=23" target="_blank" rel="noopener noreferrer">Cat-eye
+            glasses</a> spell class and are a perfect choice for especially the ladies. These are also an excellent
+         option for men to experiment with a new look!</p>
+      <ul>
+         <li><strong>Bugeye Eyeglasses</strong></li>
+      </ul>
+      <p>Bugeye eyeglasses offer a vintage appeal and go well with all kinds of attire. Opt for rimmed or semi-rimmed
+         style, whatever you like, but these look stylish in every way.</p>
+      <ul>
+         <li><strong>Square Eyeglasses</strong></li>
+      </ul>
+      <p>The square frame helps you make a bold fashion statement. You can choose metal or plastic frame depending upon
+         your choice.</p>
+      <ul>
+         <li><strong>Navigator Eyeglasses</strong></li>
+      </ul>
+      <p>Sleek navigator eyeglasses provide you with the perfect look for any gathering.
+         Navigate your way through the times with a stylish pair of navigator glasses.</p>
+
+   </div>
+
+
+
+
+
+
+   <div data-role="collapsible" class="tabWrapperdiv allow" role="tab" data-collapsible="true" aria-selected="false" aria-expanded="false">
+      <div data-role="trigger" tabindex="-1">
+         <h2>FAQs on Eyeglasses</h2>
+      </div>
+   </div>
+   <p></p>
+   <div data-role="content" class="TabBodyContent" role="tabpanel" aria-hidden="true" style="display: none;">
+      <p><strong>Which Brand is best for Eyeglasses?</strong></p>
+      <p>Some of the <strong>best eyeglasses brands</strong> like  Fastrack, Vogue, Oakley and a few
+         others provide the <strong>latest eyeglass frames</strong> that are trendy in appeal and also premium in
+         quality.</p>
+     
+      <p><strong>What Eyeglasses are in Style Now?</strong></p>
+      <p>Some of the eyeglasses in style nowadays are as follows:</p>
+      <ol>
+         <li>Oversized Square Eyeglasses</li>
+         <li>Sporty Aviator Glasses</li>
+         <li>Vintage Cat-Eye Glasses</li>
+         <li>Thin Metal Eyeglasses</li>
+         <li>Circle Round Glasses</li>
+         <li>Semi-Rimless Clubmaster Glasses</li>
+         <li>Oval &amp; Rectangular Tiny Reading Glasses</li>
+         <li>Stylish Flat Top Glasses</li>
+      </ol>
+     
+      <p><strong>Should you wear glasses all the time?</strong></p>
+      <p>If you already wear prescription glasses, your vision may be clearer than what it is without spectacles, and
+         you may like to wear glasses all the time. As long as you are comfortable, you can wear your glasses for
+         whatever time you want.</p>
+     
+      <p><strong>How do you wash your eyeglasses?</strong></p>
+      <p>You can wash your eyeglasses by following these steps:</p>
+      <ol>
+         <li>First, wash and dry your hands thoroughly.</li>
+         <li>Then, rinse the glasses under a gentle stream of lukewarm water toremove any dust.</li>
+         <li>Apply drops of lotion-free dishwashing liquid to each lens.</li>
+         <li>Gently rub both the sides of the lenses and all other parts of the frame for some time. </li>
+         <li>Rinse the lenses and the frame thoroughly.</li>
+         <li>Carefully dry the lenses as well as the frame with a clean, lint-free cloth or towel. </li>
+         <li>Then, inspect the lenses once.</li>
+      </ol>
+     
+      <p><strong>Can we Wash Spectacles with Water?</strong></p>
+      <p>Yes, you can wash your spectacles with water as there is no harm in doing so. However, make sure to rinse it
+         and wash it under a gentle stream of water.</p>
+     
+      <p><strong>How do I choose the right frame for eyeglasses?</strong></p>
+      <p>To choose the right frame for eyeglasses, first, check what kind of face type do you have. Different frame
+         shapes suit various face structures. Then check what shape and style are currently in trend. Finally, choose
+         the spectacle frame in a colour that will go well with your complexion.</p>
+     
+      <p><strong>What is the latest trend in eyeglasses?</strong></p>
+      <p>Some of the <strong>latest spectacles frames</strong> in trend are as follows:</p>
+      <ol>
+         <li>Circle Round Glasses</li>
+         <li>Vintage Cat-Eye Glasses</li>
+         <li>Clubmaster Semi-Rimless Glasses</li>
+         <li>Slim and Narrow Oval Tiny Reading Glasses</li>
+         <li>Stylish Flat Top Glasses</li>
+         <li>Embellished Statement Eyeglasses</li>
+         <li>Classic Black Rimmed Glasses</li>
+         <li>Wooden Effect Eyeglasses</li>
+      </ol>
+     
+      <p><strong>Can I buy prescription glasses online?</strong></p>
+      <p>Yes, you can buy prescription glasses online. Select your choice of an eyeglass frame, share your prescription,
+         choose your lenses, and then make the payment.</p>
+     
+      <p><strong>Is it safe to order eyeglasses online?</strong></p>
+      <p>Yes, it is safe to order eyeglasses online. You can browse through unlimited options and order the one you
+         like. Some of the <strong>best eyeglasses brands</strong> companies that provide delivery also allow exchange
+         or return in case you do not want those eyeglasses. But this is subject to specific terms and conditions.</p>
+     
+      <p><strong>Do Rimless glasses make you look older?</strong></p>
+      <p>No, it is not true that rimless glasses always make you look older. Yes, they are not as vibrant as rimmed
+         glasses because of their minimal construction, but they can still look well on certain people. However, yes, if
+         you want to add an exciting touch to your look, then you should opt for a <strong>pair of
+            glasses</strong> that <strong>are</strong> bold in colour plus thick in construction. Colourful glasses
+         seem more exuberant, and that is why they allude to a younger style.</p>
+   </div>
+
+
+
+
+
+   <div data-role="collapsible" class="tabWrapperdiv" role="tab" data-collapsible="true" aria-selected="false" aria-expanded="false">
+      <div data-role="trigger" tabindex="-1">
+         <h2>Related Searches</h2>
+      </div>
+   </div>
+
+   <div data-role="content" class="TabBodyContent" role="tabpanel" aria-hidden="true" style="display: none;">
+
+      <p><a href="https://www.bharatoptics.com/men-eyeglasses.html">Eyeglasses for Men</a> | <a href="https://www.bharatoptics.com/women-eyeglasses.html">Eyeglasses for Women</a> | <a href="https://www.bharatoptics.com/eyeglasses.html">Eyeglasses for Unisex</a></p>
+   </div>
+
+
+</div>
+<script>
+require(['jquery', 'jquery/ui'], function($){ 
+	$(".tabWrapperdiv").click(function(){
+	  $(this).next(".TabBodyContent").toggleClass("active");
+	});
+});
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "Which Brand is best for Eyeglasses?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Some of the best eyeglasses brands like Fastrack, Vogue, Oakley and a few others provide the latest eyeglass frames that are trendy in appeal and also premium in quality."
+    }
+  },{
+    "@type": "Question",
+    "name": "What Eyeglasses are in Style Now?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Some of the eyeglasses in style nowadays are as follows: Oversized Square Eyeglasses Sporty Aviator Glasses Vintage Cat-Eye Glasses Thin Metal Eyeglasses Circle Round Glasses Semi-Rimless Clubmaster Glasses Oval & Rectangular Tiny Reading Glasses Stylish Flat Top Glasses"
+    }
+  },{
+    "@type": "Question",
+    "name": "Should you wear glasses all the time?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "If you already wear prescription glasses, your vision may be clearer than what it is without spectacles, and you may like to wear glasses all the time. As long as you are comfortable, you can wear your glasses for whatever time you want."
+    }
+  },{
+    "@type": "Question",
+    "name": "How do you wash your eyeglasses?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "You can wash your eyeglasses by following these steps:First, wash and dry your hands thoroughly. Then, rinse the glasses under a gentle stream of lukewarm water toremove any dust. Apply drops of lotion-free dishwashing liquid to each lens. Gently rub both the sides of the lenses and all other parts of the frame for some time.  Rinse the lenses and the frame thoroughly. Carefully dry the lenses as well as the frame with a clean, lint-free cloth or towel. Then, inspect the lenses once."
+    }
+  },{
+    "@type": "Question",
+    "name": "Can we Wash Spectacles with Water?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes, you can wash your spectacles with water as there is no harm in doing so. However, make sure to rinse it and wash it under a gentle stream of water."
+    }
+  },{
+    "@type": "Question",
+    "name": "How do I choose the right frame for eyeglasses?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "To choose the right frame for eyeglasses, first, check what kind of face type do you have. Different frame shapes suit various face structures. Then check what shape and style are currently in trend. Finally, choose the spectacle frame in a colour that will go well with your complexion."
+    }
+  },{
+    "@type": "Question",
+    "name": "What is the latest trend in eyeglasses?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Some of the latest spectacles frames in trend are as follows: Circle Round Glasses Vintage Cat-Eye Glasses Clubmaster Semi-Rimless Glasses Slim and Narrow Oval Tiny Reading Glasses Stylish Flat Top Glasses Embellished Statement Eyeglasses Classic Black Rimmed Glasses Wooden Effect Eyeglasses"
+    }
+  },{
+    "@type": "Question",
+    "name": "Can I buy prescription glasses online?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes, you can buy prescription glasses online. Select your choice of an eyeglass frame, share your prescription, choose your lenses, and then make the payment."
+    }
+  },{
+    "@type": "Question",
+    "name": "Is it safe to order eyeglasses online?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes, it is safe to order eyeglasses online. You can browse through unlimited options and order the one you like. Some of the best eyeglasses brands companies that provide delivery also allow exchange or return in case you do not want those eyeglasses. But this is subject to specific terms and conditions."
+    }
+  },{
+    "@type": "Question",
+    "name": "Do Rimless glasses make you look older?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "No, it is not true that rimless glasses always make you look older. Yes, they are not as vibrant as rimmed glasses because of their minimal construction, but they can still look well on certain people. However, yes, if you want to add an exciting touch to your look, then you should opt for a pair of glasses that are bold in colour plus thick in construction. Colourful glasses seem more exuberant, and that is why they allude to a younger style."
+    }
+  }]
+}
+</script></div>

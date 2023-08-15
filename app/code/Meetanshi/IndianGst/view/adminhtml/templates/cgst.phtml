@@ -1,0 +1,7 @@
+<?php $_item = $block->getItem();
+?>
+<?= /* @noEscape */ $block->getOrder()->formatPrice($_item->getData('cgst_amount')) ?>
+<?php
+echo '<br>Rate:' . $_item->getCgstPercent() . '%';
+?>
+

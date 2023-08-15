@@ -1,0 +1,192 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+use Magento\Framework\App\Action\Action;
+
+?>
+<?php
+/**
+ * Product list template
+ *
+ * @var $block \Magento\Catalog\Block\Product\ListProduct
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+?>
+<?php
+$_productCollection = $block->getLoadedProductCollection();
+/** @var \Magento\Catalog\Helper\Output $_helper */
+$_helper = $block->getData('outputHelper');
+?>
+<?php if (!$_productCollection->count()): ?>
+    <div class="message info empty">
+        <div><?= $escaper->escapeHtml(__('We can\'t find products matching the selection.')) ?></div>
+    </div>
+<?php else: ?>
+    <?= $block->getToolbarHtml() ?>
+    <?= $block->getAdditionalHtml() ?>
+    <?php
+    if ($block->getMode() === 'grid') {
+        $viewMode = 'grid';
+        $imageDisplayArea = 'category_page_grid';
+        $showDescription = false;
+        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+    } else {
+        $viewMode = 'list';
+        $imageDisplayArea = 'category_page_list';
+        $showDescription = true;
+        $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::FULL_VIEW;
+    }
+    /**
+     * Position for actions regarding image size changing in vde if needed
+     */
+    $pos = $block->getPositioned();
+    ?>
+    <div class="products wrapper <?= /* @noEscape */ $viewMode ?> products-<?= /* @noEscape */ $viewMode ?>">
+        <ol class="products list items product-items">
+            <?php /** @var $_product \Magento\Catalog\Model\Product */ ?>
+            <?php foreach ($_productCollection as $_product): ?>
+            <li class="sk-product item product product-item">
+                <div class="product-item-info sk-product__item"
+                     id="product-item-info_<?= /* @noEscape */ $_product->getId() ?>"
+                     data-container="product-<?= /* @noEscape */ $viewMode ?>">
+					<div data-role="add-to-links" class="actions-secondary">
+                                    <?php if ($addToBlock = $block->getChildBlock('addto')): ?>
+                                        <?= $addToBlock->setProduct($_product)->getChildHtml() ?>
+                                    <?php endif; ?>
+                                </div>
+					<?php
+                    $productImage = $block->getImage($_product, $imageDisplayArea);
+                    if ($pos != null) {
+                        $position = 'left:' . $productImage->getWidth() . 'px;'
+                            . 'top:' . $productImage->getHeight() . 'px;';
+                    }
+                    ?>
+                    <?php // Product Image ?>
+                    <a href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>"
+                       class="product photo product-item-photo  sk-product__link"
+                       tabindex="-1">
+					<div class="sk-product__media">
+					<div class="sk-product__image" data-hover="yes">
+					<div class="sk-media">
+                        <?= $productImage->toHtml() ?>
+					</div>
+					</div>
+					</div>
+                    </a>
+					<?php /*<div class="product-item-inner">
+                            <div class="product actions product-item-actions">
+                                <div class="actions-primary">
+                                    <?php if ($_product->isSaleable()):?>
+                                        <?php $postParams = $block->getAddToCartPostParams($_product); ?>
+                                        <form data-role="tocart-form"
+                                              data-product-sku="<?= $escaper->escapeHtml($_product->getSku()) ?>"
+                                              action="<?= $escaper->escapeUrl($postParams['action']) ?>"
+                                              method="post">
+                                            <?php $options = $block->getData('viewModel')->getOptionsData($_product); ?>
+                                            <?php foreach ($options as $optionItem): ?>
+                                                <input type="hidden"
+                                                       name="<?= $escaper->escapeHtml($optionItem['name']) ?>"
+                                                       value="<?= $escaper->escapeHtml($optionItem['value']) ?>">
+                                            <?php endforeach; ?>
+                                            <input type="hidden"
+                                                   name="product"
+                                                   value="<?= / * @noEscape * / $postParams['data']['product'] ?>">
+                                            <input type="hidden"
+                                                   name="<?= / * @noEscape * / Action::PARAM_NAME_URL_ENCODED ?>"
+                                                   value="<?=
+                                                   / * @noEscape * / $postParams['data'][Action::PARAM_NAME_URL_ENCODED]
+                                                    ?>">
+                                            <?= $block->getBlockHtml('formkey') ?>
+											<button type="submit"
+                                                    title="<?= $escaper->escapeHtmlAttr(__('Add to Cart')) ?>"
+                                                    class="action tocart primary"
+                                                    disabled>
+                                            <div class="sk-product__quick-add quick-view-js">
+                                            <div class="quick-add__button">
+                                                <span class="quick-add__label"><?= $escaper->escapeHtml(__('Buy Now')) ?></span>
+												<span class="svg-data quick-add__icon">
+													<svg viewBox="0 0 27 29" xmlns="http://www.w3.org/2000/svg">
+													<g fill="none" fill-rule="evenodd">
+													<path class="path-cart" d="M22.3477 24.4283c0 .4489-.1.8147-.2972 1.0884-.2201.3056-.5436.467-.9356.467H5.2554c-.3916 0-.715-.1614-.9356-.467-.197-.2737-.2968-.6399-.2968-1.0884v-.0389c0-.0125.0007-.025.0026-.0372l1.9777-13.5796a.2263.2263 0 0 0 .0026-.0207l.0055-.0557a.3273.3273 0 0 0 .0013-.0178c.0484-.8713.6752-1.5537 1.4263-1.5537h1.8962v2.8322c0 .2348.1877.4248.4189.4248s.419-.19.419-.4248V9.1247h6.0246v2.8322c0 .2348.1877.4248.4189.4248s.4186-.19.4186-.4248V9.1247h1.8965c.7511 0 1.3776.6824 1.4263 1.5537a.2615.2615 0 0 0 .0013.0178l.0055.056a.436.436 0 0 0 .0023.0204l1.9725 13.5414.0055.0382a.2877.2877 0 0 1 .0026.0376v.0385ZM13.1853 3.6827c1.6611 0 3.0124 1.3703 3.0124 3.0547v1.5377H10.173V6.7374c0-1.6844 1.3513-3.0547 3.0123-3.0547Zm9.9882 20.545-1.976-13.5693-.004-.0373c-.0776-1.3163-1.0697-2.346-2.2618-2.346h-1.8965V6.7374c0-2.1527-1.727-3.904-3.8499-3.904-2.1228 0-3.8501 1.7513-3.8501 3.904v1.5377H7.439c-1.1925 0-2.1842 1.0297-2.2622 2.346l-.0035.0376L3.1969 24.228a1.1205 1.1205 0 0 0-.0117.1613v.0389c0 .6326.1542 1.1674.4585 1.5896.3787.5256.9512.8154 1.6117.8154H21.115c.6606 0 1.2331-.2898 1.6117-.8154.3043-.4222.4586-.957.4586-1.5896v-.0385c0-.0544-.004-.1087-.0117-.162Z" fill="#FFF"></path>
+													<path class="path-cart" d="M22.3477 24.4283c0 .4489-.1.8147-.2972 1.0884-.2201.3056-.5436.467-.9356.467H5.2554c-.3916 0-.715-.1614-.9356-.467-.197-.2737-.2968-.6399-.2968-1.0884v-.0389c0-.0125.0007-.025.0026-.0372l1.9777-13.5796a.2263.2263 0 0 0 .0026-.0207l.0055-.0557a.3273.3273 0 0 0 .0013-.0178c.0484-.8713.6752-1.5537 1.4263-1.5537h1.8962v2.8322c0 .2348.1877.4248.4189.4248s.419-.19.419-.4248V9.1247h6.0246v2.8322c0 .2348.1877.4248.4189.4248s.4186-.19.4186-.4248V9.1247h1.8965c.7511 0 1.3776.6824 1.4263 1.5537a.2615.2615 0 0 0 .0013.0178l.0055.056a.436.436 0 0 0 .0023.0204l1.9725 13.5414.0055.0382a.2877.2877 0 0 1 .0026.0376v.0385ZM13.1853 3.6827c1.6611 0 3.0124 1.3703 3.0124 3.0547v1.5377H10.173V6.7374c0-1.6844 1.3513-3.0547 3.0123-3.0547Zm9.9882 20.545-1.976-13.5693-.004-.0373c-.0776-1.3163-1.0697-2.346-2.2618-2.346h-1.8965V6.7374c0-2.1527-1.727-3.904-3.8499-3.904-2.1228 0-3.8501 1.7513-3.8501 3.904v1.5377H7.439c-1.1925 0-2.1842 1.0297-2.2622 2.346l-.0035.0376L3.1969 24.228a1.1205 1.1205 0 0 0-.0117.1613v.0389c0 .6326.1542 1.1674.4585 1.5896.3787.5256.9512.8154 1.6117.8154H21.115c.6606 0 1.2331-.2898 1.6117-.8154.3043-.4222.4586-.957.4586-1.5896v-.0385c0-.0544-.004-.1087-.0117-.162Z" stroke="#FFF" stroke-width=".75"></path>
+													</g>
+													</svg>
+												</span>
+												
+											</div>
+											</div>
+                                            </button>
+                                        </form>
+                                    <?php else:?>
+                                        <?php if ($_product->isAvailable()):?>
+                                            <div class="stock available">
+                                                <span><?= $escaper->escapeHtml(__('In stock')) ?></span></div>
+                                        <?php else:?>
+                                            <div class="stock unavailable">
+                                                <span><?= $escaper->escapeHtml(__('Out of stock')) ?></span></div>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                </div>
+                                <?= ($pos && strpos($pos, $viewMode . '-primary')) ?
+                                    / * @noEscape * / $secureRenderer->renderStyleAsTag(
+                                        $position,
+                                        'product-item-info_' . $_product->getId() . ' div.actions-primary'
+                                    ) : '' ?>
+                                
+                                <?= ($pos && strpos($pos, $viewMode . '-secondary')) ?
+                                    / * @noEscape * / $secureRenderer->renderStyleAsTag(
+                                        $position,
+                                        'product-item-info_' . $_product->getId() . ' div.actions-secondary'
+                                    ) : '' ?>
+                            </div>
+                            <?php /*if ($showDescription): ?>
+                                <div class="product description product-item-description">
+                                    <?= /* @noEscape * / $_helper->productAttribute(
+                                        $_product,
+                                        $_product->getShortDescription(),
+                                        'short_description'
+                                    ) ?>
+                                    <a href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>"
+                                       title="<?= /* @noEscape * / $_productNameStripped ?>"
+                                       class="action more"><?= $escaper->escapeHtml(__('Learn More')) ?></a>
+                                </div>
+                            <?php endif; * / ?>
+                        </div> */ ?>
+                    <div class="product details product-item-details">
+                        <?php $_productNameStripped = $block->stripTags($_product->getName(), null, true); ?>
+                        <strong class="product name product-item-name">
+                            <a class="product-item-link sk-product__title truncate-text"
+                               href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>">
+                                <?=/* @noEscape */ $_helper->productAttribute($_product, $_product->getName(), 'name')?>
+                            </a>
+                        </strong>
+                        <?= $block->getReviewsSummaryHtml($_product, $templateType) ?>
+                        <?= /* @noEscape */ $block->getProductPrice($_product) ?>
+
+                        <?= $block->getProductDetailsHtml($_product) ?>
+                    </div>
+                </div>
+                <?= ($pos && strpos($pos, $viewMode . '-actions')) ?
+                /* @noEscape */ $secureRenderer->renderStyleAsTag(
+                    $position,
+                    'product-item-info_' . $_product->getId() . ' div.product-item-actions'
+                ) : '' ?>
+            </li>
+            <?php endforeach; ?>
+        </ol>
+    </div>
+    <?= $block->getChildBlock('toolbar')->setIsBottom(true)->toHtml() ?>
+    <?php // phpcs:ignore Magento2.Legacy.PhtmlTemplate ?>
+    <script type="text/x-magento-init">
+    {
+        "[data-role=tocart-form], .form.map.checkout": {
+            "catalogAddToCart": {
+                "product_sku": "<?= $escaper->escapeJs($_product->getSku()) ?>"
+            }
+        }
+    }
+    </script>
+<?php endif; ?>

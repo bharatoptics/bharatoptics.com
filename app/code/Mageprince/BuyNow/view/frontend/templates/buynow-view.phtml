@@ -1,0 +1,41 @@
+<?php
+/**
+ * MagePrince
+ * Copyright (C) 2020 Mageprince <info@mageprince.com>
+ *
+ * @package Mageprince_BuyNow
+ * @copyright Copyright (c) 2020 Mageprince (http://www.mageprince.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author MagePrince <info@mageprince.com>
+ */
+?>
+<?php /** @var \Magento\Catalog\Block\Product\View $block */ ?>
+<?php $helper = $this->helper(\Mageprince\BuyNow\Helper\Data::class); ?>
+<?php $formId = $helper->getAddToCartFormId(); ?>
+<?php $buttonTitle = $helper->getButtonTitle() ?>
+<div class="buynow-button">
+    <!--<button type="submit"
+            title="<?= $block->escapeHtml(__($buttonTitle)) ?>"
+            id="buy-now"
+            class="action primary buy-now-btn"
+            data-mage-init='
+            {
+                "Mageprince_BuyNow/js/buy-now": {
+                    "form": "#<?= $block->escapeHtml($formId); ?>"
+                }
+            }
+            '>
+        <span><?= $block->escapeHtml(__($buttonTitle)) ?></span>
+    </button>-->
+	<div class="clearfix"></div>
+	<button type="button" class="single_add_to_cart_button sk-btn sk-btn--full sk-btn--primary sk-btn--pulse sk-add-to-cart-btn add-to-cart-js">
+		<span class="sk-btn__ripple"><span class="sk-btn__ripple--circle"></span></span>
+		<span class="sk-btn__label add">Buy on WhatsApp Chat </span>
+		<span class="sk-btn__label load">In addition...</span>
+		<span class="sk-btn__label added">Added<span class="svg-data">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 78.369 78.369">
+		<path fill="#000" d="M78.049 19.015L29.458 67.606c-.428.428-1.121.428-1.548 0L.32 40.015c-.427-.426-.427-1.119 0-1.547l6.704-6.704c.428-.427 1.121-.427 1.548 0l20.113 20.112 41.113-41.113c.429-.427 1.12-.427 1.548 0l6.703 6.704c.428.427.428 1.119 0 1.548z"></path>
+		</svg></span>
+		</span>
+	</button>
+</div>

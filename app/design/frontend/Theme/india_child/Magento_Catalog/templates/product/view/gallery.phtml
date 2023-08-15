@@ -1,0 +1,208 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * Product media data template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Gallery
+ */
+?>
+
+<?php
+$images = $block->getGalleryImages()->getItems();
+$mainImage = current(array_filter($images, function ($img) use ($block) {
+    return $block->isMainImage($img);
+}));
+
+if (!empty($images) && empty($mainImage)) {
+    $mainImage = $block->getGalleryImages()->getFirstItem();
+}
+
+$helper = $block->getData('imageHelper');
+//$smallImageData = $mainImage ? $mainImage->getData('large_image_url') : $helper->getDefaultPlaceholderUrl('image');
+//$mainImageData = $mainImage ? $mainImage->getData('small_image_url') : $helper->getDefaultPlaceholderUrl('image');
+
+?>
+<?php /*
+<!--<div class="gallery-placeholder _block-content-loading" data-gallery-role="gallery-placeholder">
+    <img
+        alt="main product photo"
+        class="gallery-placeholder__image"
+        src="<?= /* @noEscape * / $mainImageData ?>"/>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "[data-gallery-role=gallery-placeholder]": {
+            "mage/gallery/gallery": {
+                "mixins":["magnifier/magnify"],
+                "magnifierOpts": <?= / * @noEscape * / $block->getMagnifier() ?>,
+                "data": <?= / * @noEscape * / $block->getGalleryImagesJson() ?>,
+                "options": <?= / * @noEscape * / $block->getGalleryOptions()->getOptionsJson() ?>,
+                "fullscreen": <?= / * @noEscape * / $block->getGalleryOptions()->getFSOptionsJson() ?>,
+                 "breakpoints": <?= / * @noEscape * / $block->getBreakpoints() ?>
+            }
+        }
+    }
+</script>--> */ ?>
+
+<div class="sk-section sk-product-single pdg-top--0x pdg-bottom--1x product type-product post-412989 status-publish first instock product_cat-sandali has-post-thumbnail shipping-taxable purchasable product-type-variable">
+<div class="col sk-col single-product__col">
+	<div class="single-product__gallery d-none d-lg-block">
+		<div class="row g-3" id="desktop_gallery">
+			<div class="col-12 col-lg-12 sk-col swiper swiper-horizontal" data-mage-init='{"Swissup_Swiper/js/swiper" : {"lazy": true, "slidesPerView": 2, "freeMode": true, "loop": true, "autoplay": {"delay": 2500, "disableOnInteraction": false}, "spaceBetween": 20, "scrollbar":{ "el": ".swiper-scrollbar"},  "navigation": {"nextEl": ".swiper-button-next", "prevEl": ".swiper-button-prev"}, "breakpoints": {"768": {"slidesPerView": 2}, "600": {"slidesPerView": 2}, "480": {"slidesPerView": 2}}}}'>
+			<div class="swiper-wrapper" >
+			<?php foreach($images as $image) { ?>
+				<div class="swiper-slide">
+				<div class="single-product__box">
+					<div class="single-product__media" data-type="image">
+						<a data-fancybox='gallery' class="open_image_gallery">
+							<div class="sk-media">
+								<img class="sk-media__image sk-lazyload sk-lazyload__img entered loaded is--loaded" loading="lazy"  alt="Product Images"  src="<?php echo $image->getMediumImageUrl(); ?>">
+							</div>
+						</a>
+					</div>
+				</div>
+				</div>
+			<?php } ?>
+			<div class="swiper-scrollbar">
+						<div class="swiper-scrollbar-drag" style="transform: translate3d(0px, 0px, 0px); width: 331.796px;"></div>
+					</div>
+					<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+			</div>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<div class="single-product__gallery single-product__gallery--mobile d-block d-lg-none">
+	<div class="sk-carousel sk-carousel--generic" data-type="single-product">
+		<div class="sk-carousel__wrapper">
+			<div class="sk-carousel__swiper swiper swiper-horizontal" data-mage-init='{"Swissup_Swiper/js/swiper" : {"lazy": true, "slidesPerView": 2, "freeMode": true, "loop": true, "autoplay": {"delay": 2500, "disableOnInteraction": false}, "spaceBetween": 20, "scrollbar":{ "el": ".swiper-scrollbar"},  "navigation": {"nextEl": ".swiper-button-next", "prevEl": ".swiper-button-prev"}, "breakpoints": {"768": {"slidesPerView": 2}, "600": {"slidesPerView": 1}, "480": {"slidesPerView": 1}}}}' >
+				<div class="swiper-wrapper" >
+					<?php foreach($images as $image) { ?>
+					<div class="swiper-slide">
+						<div class="single-product__box">
+							<div class="single-product__media" data-type="image">
+								<a data-fancybox='gallery' class="open_image_gallery">
+									<div class="sk-media">
+										<img class="sk-media__image sk-lazyload swiper-lazy swiper-lazy-loaded" loading="lazy" alt="img_7271.jpg" src="<?php echo $image->getMediumImageUrl(); ?>">
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+					<?php } ?>
+					<div class="swiper-scrollbar">
+						<div class="swiper-scrollbar-drag"></div>
+					</div>
+					<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+				</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+
+<div class="sk-section">
+  <div class="synch-carousels display_none" id="media_gallery_popup">
+    <div class="left child">
+      <div class="gallery gallery_popup">
+	  <?php foreach($images as $image) { ?>
+        <div class="item">
+          <img src="<?php echo $image->getSmallImageUrl(); ?>" alt="Bharat Optics Popup Image" />
+        </div>
+	  <?php } ?>
+      </div>
+    </div><!--/left-->
+    <div class="right child">
+		<div class="gallery2 gallery_popup2">
+        <?php foreach($images as $image) { ?>
+			<div class="item">
+			  <img src="<?php echo $image->getLargeImageUrl(); ?>" alt="Bharat Optics Popup Image" />
+			</div>
+	    <?php } ?>
+		</div>
+	  
+      <div class="photos-counter">
+        <span></span><span></span>
+      </div>
+    </div><!--/right-->
+  </div>
+</div>
+<script>
+require(['jquery',"Magento_Ui/js/modal/modal"], function($,modal) {
+    var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: '',
+				modalClass: 'gallery_popup_modal',
+                buttons: []
+            };
+ 
+            var popup = modal(options, $('#media_gallery_popup'));
+ 			$(".open_image_gallery").click(function() {
+	
+            $('#media_gallery_popup').modal('openModal');
+			});	
+			});	
+require(['jquery', 'slick','jquery/ui',"Magento_Ui/js/modal/modal"], function($,modal) {
+$('.gallery_popup').slick({
+				rows: 0,
+	            dots: false,
+	            infinite: false,
+				draggable: true,
+	            slidesToShow: 5,
+	            slidesToScroll: 1,
+				arrows:false,
+	            autoplay: false,
+				asNavFor: $(".gallery_popup2"),
+				useTransform: false,
+				mobileFirst: true,
+				centerMode: false,
+				focusOnSelect: true,
+				responsive: [
+					{
+					  breakpoint: 768,
+					  settings: {
+						slidesToShow: 3
+					  }
+					},
+					{
+					  breakpoint: 1023,
+					  settings: {
+						slidesToShow: 4,
+						}
+					}
+				  ]
+	        });
+	$('.gallery_popup2').slick({
+		rows: 0,
+		arrows:true,
+		useTransform: false,
+		prevArrow:'<div class="swiper-button-prev swiper-arrow" tabindex="-1" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-ded40302818627310"><span class="svg-data"><svg viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg"><path stroke="#9A56FB" d="M17.8402 22.6803 8 12.8401 17.8402 3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>',
+        nextArrow:'<div class="swiper-button-next swiper-arrow" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-ded40302818627310"><span class="svg-data"><svg viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg"><path stroke="#9A56FB" d="m8 3 9.8402 9.8402L8 22.6803" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>',
+		fade: true,
+		asNavFor: $(".gallery_popup")
+	});
+		  
+/* $gl2.slick({
+  rows: 0,
+  useTransform: false,
+  prevArrow: ".arrow-left",
+  nextArrow: ".arrow-right",
+  fade: true,
+  asNavFor: $gl
+}); */
+});
+
+</script>
+<style>
+#media_gallery_popup .swiper-button-prev, #media_gallery_popup .swiper-button-next {
+	top: 20px;
+}
+</style>

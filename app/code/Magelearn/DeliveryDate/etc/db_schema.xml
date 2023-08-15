@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="sales_order" resource="sales" engine="innodb" comment="Sales Order Eye Power Attribute">
+        <column xsi:type="varchar" name="sph_right" nullable="false"  comment="spherical"/>
+        <column xsi:type="varchar" name="sph_left" nullable="false"  comment="spherical"/>
+        <column xsi:type="varchar" name="cyl_right" nullable="false"  comment="Cylinder"/>
+        <column xsi:type="varchar" name="cyl_left" nullable="false"  comment="Cylinder"/>
+        <column xsi:type="varchar" name="axis_right" nullable="false"  comment="Axis"/>
+        <column xsi:type="varchar" name="axis_left" nullable="false"  comment="Axis"/>
+        <column xsi:type="varchar" name="ad_right" nullable="false"  comment="Addition"/>
+        <column xsi:type="varchar" name="ad_left" nullable="false"  comment="Addition"/>
+        <column xsi:type="text" name="prescription_file" nullable="false"  comment="Addition"/>
+    </table>
+    <!--<table name="quote" resource="checkout" engine="innodb" comment="Quote Delivery Date Comment Attribute">
+        <column xsi:type="datetime" name="delivery_date" nullable="false"  comment="Delivery Date"/>
+        <column xsi:type="text" name="delivery_comment" nullable="false"  comment="Delivery Comment"/>
+		<column xsi:type="text" name="lens" nullable="true"  comment="Lens"/>
+        <column xsi:type="text" name="eye_power_type" nullable="true"  comment="Eye Power Type"/>
+        <column xsi:type="text" name="left_eye" nullable="true"  comment="Left Eye"/>
+        <column xsi:type="text" name="right_eye" nullable="true"  comment="Right Eye"/>
+        <column xsi:type="text" name="prescription_file" nullable="true"  comment="Prescription File"/>
+    </table>-->
+    <!--<table name="sales_order_grid" resource="sales" engine="innodb" comment="Sales Order Grid Delivery Date Attribute">
+        <column xsi:type="datetime" name="delivery_date" nullable="false"  comment="Delivery Date"/>
+    </table>-->
+    <!--<table name="quote_address" resource="checkout" engine="innodb" comment="Quote Address Delivery Date Attribute">
+        <column xsi:type="datetime" name="delivery_date" nullable="false"  comment="Delivery Date"/>
+		<column xsi:type="text" name="lens" nullable="true"  comment="Lens"/>
+        <column xsi:type="text" name="eye_power_type" nullable="true"  comment="Eye Power Type"/>
+        <column xsi:type="text" name="left_eye" nullable="true"  comment="Left Eye"/>
+        <column xsi:type="text" name="right_eye" nullable="true"  comment="Right Eye"/>
+        <column xsi:type="text" name="prescription_file" nullable="true"  comment="Prescription File"/>
+    </table>
+    <table name="sales_order_address" resource="checkout" engine="innodb" comment="Sales Order Address Delivery Date Attribute">
+        <column xsi:type="datetime" name="delivery_date" nullable="false"  comment="Delivery Date"/>
+		<column xsi:type="text" name="lens" nullable="true"  comment="Lens"/>
+        <column xsi:type="text" name="eye_power_type" nullable="true"  comment="Eye Power Type"/>
+        <column xsi:type="text" name="left_eye" nullable="true"  comment="Left Eye"/>
+        <column xsi:type="text" name="right_eye" nullable="true"  comment="Right Eye"/>
+        <column xsi:type="text" name="prescription_file" nullable="true"  comment="Prescription File"/>
+    </table>-->
+</schema>

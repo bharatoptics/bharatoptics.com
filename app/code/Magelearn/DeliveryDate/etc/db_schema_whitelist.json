@@ -1,0 +1,15 @@
+{
+    "sales_order": {
+        "column": {
+            "sph_right": true,
+            "sph_left": true,
+            "cyl_right": true,
+            "cyl_left": true,
+            "axis_right": true,
+            "axis_left": true,
+            "ad_right": true,
+            "ad_left": true,
+            "prescription_file": true
+        }
+    }
+}

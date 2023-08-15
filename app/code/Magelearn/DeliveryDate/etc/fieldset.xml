@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:DataObject/etc/fieldset.xsd">
+    <scope id="global">
+        <fieldset id="sales_convert_quote">
+            <!--<field name="delivery_comment">
+                <aspect name="to_order"/>
+            </field>
+            <field name="delivery_date">
+            	<aspect name="to_order" />
+        	</field>-->
+			<field name="sph_right">
+            	<aspect name="to_order" />
+        	</field>
+			<field name="sph_left">
+            	<aspect name="to_order" />
+        	</field>
+			<field name="cyl_right">
+            	<aspect name="to_order" />
+        	</field>
+			<field name="cyl_left">
+            	<aspect name="to_order" />
+        	</field>
+			<field name="axis_right">
+            	<aspect name="to_order" />
+        	</field>
+			<field name="axis_left">
+            	<aspect name="to_order" />
+        	</field>
+			<field name="ad_right">
+            	<aspect name="to_order" />
+        	</field>
+			<field name="ad_left">
+            	<aspect name="to_order" />
+        	</field>
+			<field name="prescription_file">
+            	<aspect name="to_order" />
+        	</field>
+        </fieldset>
+    </scope>
+</config>
+

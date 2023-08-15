@@ -1,0 +1,100 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Catalog\Block\Product\Gallery $block */
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+?>
+<?php /* $_width = $block->getImageWidth(); ?> 
+<div class="product-image-popup">
+    <div class="buttons-set"><a href="#" class="button" role="close-window">
+            <span><?= $block->escapeHtml(__('Close Window')) ?></span></a></div>
+    <?php if ($block->getPreviousImageUrl() || $block->getNextImageUrl()):?>
+        <div class="nav">
+            <?php if ($_prevUrl = $block->getPreviousImageUrl()):?>
+                <a href="<?= $block->escapeUrl($_prevUrl) ?>"
+                   class="prev">&laquo; <?= $block->escapeHtml(__('Prev')) ?></a>
+            <?php endif; ?>
+            <?php if ($_nextUrl = $block->getNextImageUrl()):?>
+                <a href="<?= $block->escapeUrl($_nextUrl) ?>"
+                   class="next"><?= $block->escapeHtml(__('Next')) ?> &raquo;</a>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+    <?php if ($_imageTitle = $block->escapeHtml($block->getCurrentImage()->getLabel())):?>
+        <h1 class="image-label"><?= /* @noEscape * / $_imageTitle ?></h1>
+    <?php endif; ?>
+    <?php
+    $imageUrl = $block->getImageUrl();
+    ?>
+    <img src="<?= $block->escapeUrl($imageUrl) ?>"
+        <?php if ($_width):?>
+            width="<?= /* @noEscape * / $_width ?>"
+        <?php endif; ?>
+         alt="<?= $block->escapeHtmlAttr($block->getCurrentImage()->getLabel()) ?>"
+         title="<?= $block->escapeHtmlAttr($block->getCurrentImage()->getLabel()) ?>"
+         id="product-gallery-image"
+         class="image"
+         data-mage-init='{"catalogGallery":{}}'/>
+    <div class="buttons-set"><
+        a href="#" class="button" role="close-window"><span><?= $block->escapeHtml(__('Close Window')) ?></span></a>
+    </div>
+    <?php if ($block->getPreviousImageUrl() || $block->getNextImageUrl()):?>
+        <div class="nav">
+            <?php if ($_prevUrl = $block->getPreviousImageUrl()):?>
+                <a href="<?= $block->escapeUrl($_prevUrl) ?>"
+                   class="prev">&laquo; <?= $block->escapeHtml(__('Prev')) ?></a>
+            <?php endif; ?>
+            <?php if ($_nextUrl = $block->getNextImageUrl()):?>
+                <a href="<?= $block->escapeUrl($_nextUrl) ?>"
+                   class="next"><?= $block->escapeHtml(__('Next')) ?> &raquo;</a>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+</div>
+<?= /* @noEscape * / $secureRenderer->renderStyleAsTag(
+    'width:' . /* @noEscape * / $_width . 'px;',
+    'div.product-image-popup'
+) */ ?>
+<div class="col sk-col single-product__col">
+	<div class="single-product__gallery d-none d-lg-block">
+		<div class="row g-3">
+			<div class="col-12 col-lg-6 sk-col">
+				<div class="single-product__box">
+					<div class="sk-product__head">
+						<div class="sk-product__wishlist sk-ajax_add_to_wishlist_button">
+							<span class="svg-data sk-product__wishlist--icon">
+							<svg viewBox="0 0 33 29" xmlns="http://www.w3.org/2000/svg">
+							<path d="M16.905 27.8831a.7597.7597 0 0 1-.8096 0h-.0001c-.1807-.1142-4.4712-2.8451-8.4615-6.7898-2.3653-2.3385-4.1246-4.6167-5.229-6.7714C.9793 11.5402.6366 8.9467 1.3865 6.6133c.4893-1.5843 1.513-3.0155 2.88-4.022C5.6804 1.5504 7.3666 1 9.1425 1c3.413 0 5.4237 2.047 7.3582 4.0434C18.458 3.0325 20.5066 1 23.8577 1c1.776 0 3.4622.5503 4.8762 1.5914 1.3659 1.0056 2.3888 2.4353 2.881 4.0258.7482 2.3323.4052 4.9246-1.0196 7.7047-1.1042 2.1548-2.8635 4.433-5.2288 6.7714-3.9902 3.9447-8.2807 6.6756-8.4614 6.7898Z" stroke="#000" stroke-width="2" fill="none"></path>
+							</svg></span></div></div><div class="single-product__media" data-type="image">
+<a href="https://www.sublimeshop.it/wp-content/uploads/2022/07/img_9759.jpg" data-fancybox="product-gallery"><div class="sk-media">
+<img class="sk-media__image sk-lazyload sk-lazyload__img entered loaded is--loaded" loading="lazy" data-src="https://www.sublimeshop.it/wp-content/uploads/2022/07/img_9759-700x1050.jpg" alt="img_9759.jpg" data-ll-status="loaded" src="https://www.sublimeshop.it/wp-content/uploads/2022/07/img_9759-700x1050.jpg"></div>
+</a></div></div></div><div class="col-12 col-lg-6 sk-col"><div class="single-product__box"><div class="single-product__media" data-type="image">
+<a href="https://www.sublimeshop.it/wp-content/uploads/2022/07/img_9762.jpg" data-fancybox="product-gallery"><div class="sk-media">
+<img class="sk-media__image sk-lazyload sk-lazyload__img entered loaded is--loaded" loading="lazy" data-src="https://www.sublimeshop.it/wp-content/uploads/2022/07/img_9762-700x1050.jpg" alt="img_9762.jpg" data-ll-status="loaded" src="https://www.sublimeshop.it/wp-content/uploads/2022/07/img_9762-700x1050.jpg"></div>
+</a></div></div></div><div class="col-12 col-lg-6 sk-col"><div class="single-product__box single-product__box--100"><div class="single-product__informations"><div class="box__description"><h3 class="box__headline">Description</h3>
+Faux leather sandal, heel height 5 cm</div><div class="box__sku">SKU: TONIA-BEIGE</div></div></div></div><div class="col-12 col-lg-6 sk-col"><div class="single-product__box"><div class="single-product__media" data-type="image">
+<a href="https://www.sublimeshop.it/wp-content/uploads/2022/07/img_9761.jpg" data-fancybox="product-gallery"><div class="sk-media">
+<img class="sk-media__image sk-lazyload sk-lazyload__img entered loaded is--loaded" loading="lazy" data-src="https://www.sublimeshop.it/wp-content/uploads/2022/07/img_9761-700x1050.jpg" alt="img_9761.jpg" data-ll-status="loaded" src="https://www.sublimeshop.it/wp-content/uploads/2022/07/img_9761-700x1050.jpg"></div>
+</a></div></div></div><div class="col-12 col-lg-6 sk-col"><div class="single-product__box"><div class="single-product__media" data-type="image">
+<a href="https://www.sublimeshop.it/wp-content/uploads/2022/07/img_9760.jpg" data-fancybox="product-gallery"><div class="sk-media">
+<img class="sk-media__image sk-lazyload sk-lazyload__img" loading="lazy" data-src="https://www.sublimeshop.it/wp-content/uploads/2022/07/img_9760-700x1050.jpg" alt="img_9760.jpg"></div>
+</a></div></div></div></div></div><div class="single-product__gallery single-product__gallery--mobile d-block d-lg-none"><div class="sk-carousel sk-carousel--generic" data-type="single-product"><div class="sk-carousel__wrapper"><div class="sk-carousel__swiper swiper swiper-initialized swiper-horizontal swiper-pointer-events swiper-autoheight swiper-watch-progress"><div class="swiper-wrapper" style="transition-duration: 0ms; height: 0px;" id="swiper-wrapper-d43c25ecdbad17cb" aria-live="polite"><div class="swiper-slide"><div class="single-product__box"><div class="sk-product__head"><div class="sk-product__wishlist sk-ajax_add_to_wishlist_button" data-product_id="412989">
+<span class="svg-data sk-product__wishlist--icon">
+<svg viewBox="0 0 33 29" xmlns="http://www.w3.org/2000/svg">
+<path d="M16.905 27.8831a.7597.7597 0 0 1-.8096 0h-.0001c-.1807-.1142-4.4712-2.8451-8.4615-6.7898-2.3653-2.3385-4.1246-4.6167-5.229-6.7714C.9793 11.5402.6366 8.9467 1.3865 6.6133c.4893-1.5843 1.513-3.0155 2.88-4.022C5.6804 1.5504 7.3666 1 9.1425 1c3.413 0 5.4237 2.047 7.3582 4.0434C18.458 3.0325 20.5066 1 23.8577 1c1.776 0 3.4622.5503 4.8762 1.5914 1.3659 1.0056 2.3888 2.4353 2.881 4.0258.7482 2.3323.4052 4.9246-1.0196 7.7047-1.1042 2.1548-2.8635 4.433-5.2288 6.7714-3.9902 3.9447-8.2807 6.6756-8.4614 6.7898Z" stroke="#000" stroke-width="2" fill="none"></path>
+</svg></span></div></div><div class="single-product__media" data-type="image">
+<a href="https://www.sublimeshop.it/wp-content/uploads/2022/07/img_9759.jpg" data-fancybox="product-gallery"><div class="sk-media">
+<img class="sk-media__image sk-lazyload swiper-lazy" loading="lazy" data-src="https://www.sublimeshop.it/wp-content/uploads/2022/07/img_9759-700x1050.jpg" alt="img_9759.jpg"></div>
+</a></div></div></div><div class="swiper-slide"><div class="single-product__box"><div class="single-product__media" data-type="image">
+<a href="https://www.sublimeshop.it/wp-content/uploads/2022/07/img_9762.jpg" data-fancybox="product-gallery"><div class="sk-media">
+<img class="sk-media__image sk-lazyload swiper-lazy" loading="lazy" data-src="https://www.sublimeshop.it/wp-content/uploads/2022/07/img_9762-700x1050.jpg" alt="img_9762.jpg"></div>
+</a></div></div></div><div class="swiper-slide"><div class="single-product__box"><div class="single-product__media" data-type="image">
+<a href="https://www.sublimeshop.it/wp-content/uploads/2022/07/img_9761.jpg" data-fancybox="product-gallery"><div class="sk-media">
+<img class="sk-media__image sk-lazyload swiper-lazy" loading="lazy" data-src="https://www.sublimeshop.it/wp-content/uploads/2022/07/img_9761-700x1050.jpg" alt="img_9761.jpg"></div>
+</a></div></div></div><div class="swiper-slide"><div class="single-product__box"><div class="single-product__media" data-type="image">
+<a href="https://www.sublimeshop.it/wp-content/uploads/2022/07/img_9760.jpg" data-fancybox="product-gallery"><div class="sk-media">
+<img class="sk-media__image sk-lazyload swiper-lazy" loading="lazy" data-src="https://www.sublimeshop.it/wp-content/uploads/2022/07/img_9760-700x1050.jpg" alt="img_9760.jpg"></div>
+</a></div></div></div></div><span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div></div></div></div></div>

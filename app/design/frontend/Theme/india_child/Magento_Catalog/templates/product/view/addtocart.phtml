@@ -1,0 +1,415 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var $block \Magento\Catalog\Block\Product\View */
+?>
+<?php $_product = $block->getProduct();  ?>
+<?php if ($_product->isSaleable()) :?>
+<div class="box-tocart">
+    <div class="fieldset">
+		<?php if($_product->getPopupType()==38) { $buttonTitle = __('Select Lens'); $buttonTitle2 = __('Buy Frame Only'); ?>
+		<div class="actions">            
+			<button type="button" class="single_add_to_cart_button sk-btn sk-btn--full sk-btn--primary sk-btn--pulse sk-add-to-cart-btn add-to-cart-js wc-variation-selection-needed" id="product-addtocart-button-prescription">
+				<span class="sk-btn__ripple"><span class="sk-btn__ripple--circle"></span></span>
+				<span class="sk-btn__label add"><?= $block->escapeHtml($buttonTitle) ?></span>
+				<span class="sk-btn__label load">In addition...</span>	
+			</button>
+            <?= $block->getChildHtml('', true) ?>
+        </div>
+		<div class="actions">
+            <button type="submit" class="single_add_to_cart_button sk-btn sk-btn--full sk-btn--primary sk-btn--pulse sk-add-to-cart-btn add-to-cart-js  wc-variation-selection-needed">
+					<span class="sk-btn__ripple"><span class="sk-btn__ripple--circle"></span></span>
+					<span class="sk-btn__label add"><?= $block->escapeHtmlAttr($buttonTitle2) ?></span>
+			
+			</button>
+            <?= $block->getChildHtml('', true) ?>
+        </div>
+		<?php } else { $buttonTitle = __('Buy Now'); ?>
+        <?php if ($block->shouldRenderQuantity()) :?>
+        <div class="field qty display_none">
+            <label class="label" for="qty"><span><?= $block->escapeHtml(__('Qty')) ?></span></label>
+            <div class="control">
+                <input type="number"
+                       name="qty"
+                       id="qty"
+                       min="0"
+                       value="<?= $block->getProductDefaultQty() * 1 ?>"
+                       title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
+                       class="input-text qty"
+                       data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                       />
+            </div>
+        </div>
+        <?php endif; ?>
+        <div class="actions">
+            <button type="submit" class="single_add_to_cart_button sk-btn sk-btn--full sk-btn--primary sk-btn--pulse sk-add-to-cart-btn add-to-cart-js  wc-variation-selection-needed">
+					<span class="sk-btn__ripple"><span class="sk-btn__ripple--circle"></span></span>
+					<span class="sk-btn__label add"><?= $block->escapeHtmlAttr($buttonTitle) ?></span>
+			
+			</button>
+            <?= $block->getChildHtml('', true) ?>
+        </div>
+		<?php } ?>
+	</div>
+</div>
+<?php  endif; ?>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/js/validate-product": {}
+        }
+    }
+</script>
+
+<?php $_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$product = $_objectManager->get('\Magento\Catalog\Model\Product')->load($_product->getEntityId());
+$customOptions = $_objectManager->get('Magento\Catalog\Model\Product\Option')->getProductOptionCollection($product);
+$customOptionsData = $customOptions->getData();
+?>
+
+<div id="prescription-modal-content" class="display_none">
+<div class="display-flex text-center justify-content-center margin-t10">
+	<div class="power-tab text-left display-flex power_lens_step1">
+		<div class="info display-flex  power-tab_enable">
+			<div class="second-headline ">Power Type</div>
+		</div>
+		<div class="tab-border "></div>
+	</div>
+	<div class="power-tab text-left display-flex power-tab_cursor-not-allowed power_lens_step2">
+		<div class="info display-flex bord">
+			<div class="second-headline ">Lens Type</div>
+		</div>
+		<div class="tab-border "></div>
+	</div>
+	<div class="power-tab text-left display-flex power-tab_cursor-not-allowed power_lens_step3">
+		<div class="info display-flex bord">
+			<div class="second-headline ">Eye Power</div>
+		</div>
+	</div>
+</div>
+<div class="power-type-modal h-100vh-less150 overflow-y-auto margin-t150">
+	<div class="extra-div">
+		<div class="select-power-type-section w-80 padding-t30 padding-b40 cursor-pointer margin-0-auto">
+			<?php foreach($customOptions as $customOption) { if($customOption->getTitle()=="Power Type") { //$optionData = $customOption->getValues(); ?>
+			<div class="border-gray bora-9 padding-t10 padding-b10 padding-l20 padding-r20 margin-b20 select-power-type" data-id="#options_<?php echo $customOption->getOptionId(); ?>_2">
+				<div class="display-flex align-items-center justify-content-between">
+					<div class="display-flex align-items-center">
+						<img alt="single_vision" class="padding-r25" src="https://www.bharatoptics.com/pub/static/frontend/Theme/bharat_child/en_US/images/single_vision.webp">
+						<div>
+							<div class="fs16 fw600">Single Vision</div>
+							<div class="fs13 power-type-desp padding-t5">For distance or near vision  (Thin, anti-glare, blue-cut options)</div>
+						</div>
+					</div>
+					<img alt="check" class="cursor-pointer check_disabled" src="https://www.bharatoptics.com/pub/static/frontend/Theme/bharat_child/en_US/images/check_disabled.webp">
+					<img alt="check" class="cursor-pointer check_enabled display_none" src="https://www.bharatoptics.com/pub/static/frontend/Theme/bharat_child/en_US/images/check_enabled.png">
+				</div>
+			</div>
+			<div class="border-gray bora-9 padding-t10 padding-b10 padding-l20 padding-r20 margin-b20 select-power-type" data-id="#options_<?php echo $customOption->getOptionId(); ?>_2">
+			<div class="display-flex align-items-center justify-content-between">
+				<div class="display-flex align-items-center">
+					<img alt="zero_power" class="padding-r25" src="https://www.bharatoptics.com/pub/static/frontend/Theme/bharat_child/en_US/images/zero_power.webp">
+					<div>
+						<div class="fs16 fw600">Zero Power</div>
+						<div class="fs13 power-type-desp padding-t5">Block 98% of harmful rays (Anti-glare and blue-cut options)</div>
+					</div>
+				</div>
+				<img alt="check" class="cursor-pointer check_disabled" src="https://www.bharatoptics.com/pub/static/frontend/Theme/bharat_child/en_US/images/check_disabled.webp">
+				<img alt="check" class="cursor-pointer check_enabled display_none" src="https://www.bharatoptics.com/pub/static/frontend/Theme/bharat_child/en_US/images/check_enabled.png">
+			</div>
+			</div>
+			<?php } } ?>
+			<!--<div class="border-gray bora-9 padding-t10 padding-b10 padding-l20 padding-r20 margin-b20 select-power-type" data-id="2">
+				<div class="display-flex align-items-center justify-content-between">
+					<div class="display-flex align-items-center">
+						<img alt="bifocal" class="padding-r25" src="https://static.lenskart.com/media/desktop/img/pdp/bifocal.png">
+						<div>
+							<div class="fs16 fw600">Bifocal/Progressive</div>
+							<div class="fs13 power-type-desp padding-t5">Bifocal and Progressives (For two powe₹in same lenses)</div>
+						</div>
+					</div>
+					<img alt="check" class="cursor-pointer" src=" https://static.lenskart.com/media/desktop/img/pdp/check_disabled.png">
+				</div>
+			</div>-->
+			<div class="border-gray bora-9 padding-t10 padding-b10 padding-l20 padding-r20 margin-b20 select-power-type" data-id="3" data-mage-init='
+            {
+                "Mageprince_BuyNow/js/buy-now": {
+                    "form": "#product_addtocart_form"
+                }
+            }
+            '>
+				<div class="display-flex align-items-center justify-content-between">
+					<div class="display-flex align-items-center">
+						<img alt="frame_only" class="padding-r25" src="https://www.bharatoptics.com/pub/static/frontend/Theme/bharat_child/en_US/images/frame_only.webp">
+						<div>
+							<div class="fs16 fw600">Frame Only</div>
+							<div class="fs13 power-type-desp padding-t5">Buy Only Frame</div>
+						</div>
+					</div>
+					<img alt="check" class="cursor-pointer" src="https://www.bharatoptics.com/pub/static/frontend/Theme/bharat_child/en_US/images/check_disabled.webp">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<section class="packages-list display_none">
+	<div class="slider-main-bk slick-slider-bk slider-custom-bk package-lens-button" style="width: 100%;">		
+		<?php foreach($customOptions as $customOption) { if($customOption->getTitle()=="Lens") {  ?>
+		<div  class="lens-box-bk item add-lens-to-cart margin-b15">
+			<div>
+				<div class="">
+					<div class="package">
+						<div class="bluecut-logo">
+						<!--<h2 class="logo">
+						<img alt="BLU Thin" src="https://static3.lenskart.com/media/desktop/img/blu_logo.png" title="BLU Thin"></h2>-->
+						<div class="price">Lens<strong> Free</strong></div>
+						<div class="price">Frame + Lens<strong><br>₹ <?php echo $_product->getFinalPrice(); ?></strong></div>
+						<div class="warranty">1 Year Warranty</div>
+						<button class="btn btn-warning select-lens-button" data-id="#options_<?php echo $customOption->getOptionId(); ?>_2" data-price="<?php echo $_product->getFinalPrice(); ?>">SELECT LENS</button>
+						</div>
+							<ul class="specs-list">
+								<li style="background-color: rgb(255, 255, 255);">Anti Reflection of lights greatly reduce dangers during night drive.</li>
+								<li style="background-color: rgb(250, 250, 250);">Protect your eyes from harmful rays.</li>
+								<li style="background-color: rgb(255, 255, 255);">Can be seen clear & bright.</li>
+								<li style="background-color: rgb(250, 250, 250);">Eliminate the static electricity.</li>
+								<li style="background-color: rgb(255, 255, 255);">Light weight & hardness of surface</li>
+								<li style="background-color: rgb(250, 250, 250);">UV Protection</li>
+								<li style="background-color: rgb(255, 255, 255);">Powers Upto 10.00</li>
+							</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div  class="lens-box-bk item add-lens-to-cart margin-b15"><div>
+			<div class="">
+				<div class="package ">
+					<div class="bluecut-logo">
+					<!--<h2 class="logo">
+					<img alt="BLU Thin" src="https://static3.lenskart.com/media/desktop/img/blu_logo.png" title="BLU Thin"></h2>-->
+					<div class="price">Lens<strong>₹ 499</strong></div>
+					<div class="price">Frame + Lens<strong><br>₹ <?php echo $_product->getFinalPrice()+499; ?></strong></div>
+					<div class="warranty">1 Year Warranty</div>
+					<button class="btn btn-warning select-lens-button" data-id="#options_<?php echo $customOption->getOptionId(); ?>_3" data-price="<?php echo $_product->getFinalPrice()+499; ?>">SELECT LENS</button>
+					</div>
+						<ul class="specs-list">
+							<li style="background-color: rgb(255, 255, 255);">Double side Anti-Glare.</li>
+							<li style="background-color: rgb(250, 250, 250);">Glare prevention.</li>
+							<li style="background-color: rgb(255, 255, 255);">High Transmission.</li>
+							<li style="background-color: rgb(250, 250, 250);">Flat / Thin / Light Lens.</li>
+							<li style="background-color: rgb(255, 255, 255);">Prevents distortion at the edges.</li>
+							<li style="background-color: rgb(250, 250, 250);">Protection from computer, mobile, tv & radiation etc.</li>
+							<li style="background-color: rgb(255, 255, 255);">UV Protection</li>
+							<li style="background-color: rgb(250, 250, 250);">Powers Upto 10.00</li>
+						</ul>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div  class="lens-box-bk item add-lens-to-cart"><div>
+			<div class="">
+				<div class="package ">
+					<div class="bluecut-logo">
+					<!--<h2 class="logo">
+					<img alt="BLU Thin" src="https://static3.lenskart.com/media/desktop/img/blu_logo.png" title="BLU Thin"></h2>-->
+					<div class="price">Lens <strong>₹ 999</strong></div>
+					<div class="price">Frame + Lens<strong><br>₹ <?php echo $_product->getFinalPrice()+999; ?></strong></div>
+					<div class="warranty">1 Year Warranty</div>
+					<button class="btn btn-warning select-lens-button" data-id="#options_<?php echo $customOption->getOptionId(); ?>_4" data-price="<?php echo $_product->getFinalPrice()+999; ?>">SELECT LENS</button>
+					</div>
+						<ul class="specs-list">
+							<li style="background-color: rgb(255, 255, 255);">Transmission over 98% blue + green coating for super clear & brighter vision.</li>
+							<li style="background-color: rgb(250, 250, 250);">Blue block monomer for blocking the harmful blue light.</li>
+							<li style="background-color: rgb(255, 255, 255);">Super Hydrophobic.</li>
+							<li style="background-color: rgb(250, 250, 250);">Hard multi coating anti EMI coated</li>
+							<li style="background-color: rgb(255, 255, 255);">Good for computer, Mobile, TV and night driving.</li>
+							<li style="background-color: rgb(250, 250, 250);">100% accurate power.</li>
+							<li style="background-color: rgb(255, 255, 255);">UV Protection</li>
+							<li style="background-color: rgb(250, 250, 250);">Powers upto 10.00</li>
+						</ul>
+				</div>
+			</div>
+			</div>
+		</div>
+		<?php } } ?>
+	</div>
+</section>
+
+<div class="h-100vh-less240 overflow-y-scroll margin-t150 margin-b90 add_eye_power display_none">
+	<div class="extra-div">
+		<div class="submit-power-info padding-l15 padding-r15">
+			<div class="margin-0-auto margin-b20 padding-15 border-gray bora-4" style="max-width: 602px;">
+				<div class="text-center fs22 fw700 padding-b15 padding-t15">What About My Eye Power?</div>
+					<div class="w-80 margin-0-auto fs15 margin-b5 first_popup_image">
+							<img alt="power submit time" class="padding-r10" src="https://www.bharatoptics.com/pub/static/frontend/Theme/bharat_child/en_US/images/right.webp"/>You can submit your eye power after Payment step. 
+						</div>
+					
+					<ul class="prescription_button padding-t15 fs15 w-80 margin-0-auto">
+						<li class="padding-b5 enter_prescription">
+							<img alt="Enter manually" class="padding-r10" src="https://www.bharatoptics.com/pub/static/frontend/Theme/bharat_child/en_US/images/enter_manullay.webp">Enter manually
+						</li>
+						<li class="padding-t5"><img alt="Phone Assistance" class="padding-r10" src="https://www.bharatoptics.com/pub/static/frontend/Theme/bharat_child/en_US/images/phone.webp">Phone Assistance
+						</li>
+						<li class="padding-b5 upload_prescription"><img alt="Upload Prescription" class="padding-r10" src="https://www.bharatoptics.com/pub/static/frontend/Theme/bharat_child/en_US/images/upload_prescription.webp">Upload Prescription
+						</li>
+						<li class="padding-t5 share_prescription"><img alt="Home Eye Checkup" class="padding-r10" src="https://www.bharatoptics.com/pub/static/frontend/Theme/bharat_child/en_US/images/home_eye_checkup.webp">Share on WhatsApp / Emails
+						</li>
+					</ul>
+					
+					<div class="share_prescription_box border-top-gray padding-t15 padding-b15 padding-l10">
+						<div class="w-80 margin-0-auto fs15 margin-b5">
+							<img alt="power submit time" class="padding-r10" src="https://www.bharatoptics.com/pub/static/frontend/Theme/bharat_child/en_US/images/right.webp">Power can be submitted within 10 days of order placement
+						</div>
+						<div class="w-80 margin-0-auto fs15 margin-b5">
+							<img alt="power submit time" class="padding-r10" src="https://www.bharatoptics.com/pub/static/frontend/Theme/bharat_child/en_US/images/right.webp">No additional charges for high/complex power 
+						</div>
+					</div>
+				</div>
+			<div class="clearfix"></div>	
+			<!--<div class="display-flex align-items-center justify-content-center margin-t15 margin-b25">
+			<span class="tnc-headline">I have read and understood the terms of power submission</span>
+			</div>-->
+			<div class="footer-div bottomInc">
+			<div class="subtotal">
+			<span class="subtext">Subtotal<span class="frametext"> (Frame + Lens): </span></span><span class="pricetotal"></span></div>
+			<button class="single_add_to_cart_button sk-btn sk-btn--full sk-btn--primary sk-btn--pulse sk-add-to-cart-btn add-to-cart-js  wc-variation-selection-needed" data-mage-init='
+            {
+                "Mageprince_BuyNow/js/buy-lens": {
+                    "form": "#product_addtocart_form"
+                }
+            }
+            '>	
+				<span class="sk-btn__ripple"><span class="sk-btn__ripple--circle"></span></span>
+				<span class="sk-btn__label add">Buy Now</span>
+			</button>
+			
+			
+			
+			
+			</div>
+			
+		</div>
+	</div>
+</div>
+</div>
+<script>
+		require(['jquery'],function($) {
+			$(".select-power-type").on('click',function(){ 
+				var power_type = $(this).attr('data-id');
+				$(".select-power-type").each(function (index, element) { 
+					$(element).removeClass('selected');
+				});
+				$(".cursor-pointer.check_disabled").each(function (index, el) { 
+					$(el).removeClass('display_none');
+				});
+				$(".cursor-pointer.check_enabled").each(function (index, el2) { 
+					$(el2).addClass('display_none');
+				});
+				$(this).find(".cursor-pointer.check_enabled").removeClass('display_none');
+				$(this).find(".cursor-pointer.check_disabled").addClass('display_none');
+				if (!$(this).hasClass("selected")) { $(this).addClass('selected'); }
+				if (!$(".power_lens_step1").hasClass("selected")) { $(".power_lens_step1").addClass('selected'); }
+				if(power_type!=3) {
+					$(".power-type-modal").addClass('display_none');
+					$(".packages-list").removeClass('display_none');
+					$("#popup_powertype").find(power_type).click();		
+				/* } else if(power_type==1) {
+					$(".power-type-modal").addClass('display_none');
+					$(".packages-list").removeClass('display_none');
+					$("#popup_powertype").find("#options_1_3").click();		
+				} else if(power_type==2) {
+					$(".power-type-modal").addClass('display_none');
+					$(".packages-list").removeClass('display_none');
+				 */} else {
+					$("#prescription-modal-content").closeModal();
+					$("#product_addtocart_form").submit(function( event ) {
+					  event.preventDefault();
+					});
+				}
+            });
+			$(".select-lens-button").on('click',function(){ 
+				$(this).addClass('selected');
+				if (!$(".power_lens_step2").hasClass("selected")) { $(".power_lens_step2").addClass('selected'); }
+				var lensID = $(this).attr('data-id');
+				$(".packages-list").addClass('display_none');
+				$(".add_eye_power").removeClass('display_none');
+				var lens = $(this).attr("data-id");
+				var Totalprice = $(this).attr("data-price");
+				$(".pricetotal").html('₹ '+Totalprice);
+				$("#popup_lens").find(lens).click(); 
+				/* if(lens==3) { $("#popup_lens").find("#options_2_2").click(); }
+				if(lens==4) { $("#popup_lens").find("#options_2_3").click(); }
+				if(lens==5) { $("#popup_lens").find("#options_2_4").click(); } */
+				
+			});
+			$(".power_lens_step1").on('click',function(){
+					$(".power-type-modal").removeClass('display_none');
+					if (!$(".packages-list").hasClass("display_none")) {
+						$(".packages-list").addClass('display_none');
+					}
+					if (!$(".add_eye_power").hasClass("display_none")) {
+						$(".add_eye_power").addClass('display_none');
+					}
+				}); 
+			$(".power_lens_step2").on('click',function(){
+				$(".packages-list").removeClass('display_none');
+				if (!$(".power-type-modal").hasClass("display_none")) {
+					$(".power-type-modal").addClass('display_none');
+				}
+				if (!$(".add_eye_power").hasClass("display_none")) {
+					$(".add_eye_power").addClass('display_none');
+				}
+			
+			});  
+		});
+			require(
+		[
+			'jquery',
+			'Magento_Ui/js/modal/modal'
+		],
+		function(
+			$,
+			modal
+		) {
+			var options = {
+				type: 'popup',
+				responsive: true,
+				innerScroll: true,
+				title: '<?php echo $_product->getName(); ?>',
+				buttons: [{
+					text: $.mage.__('Close'),
+					class: '',
+					click: function () {
+						this.closeModal();
+					}
+				}],
+				opened: function($Event) {
+                    $(".modal-footer").hide();
+                }
+			};
+ 
+			var popup = modal(options, $("#prescription-modal-content"));
+			/* $("#prescription-modal-content").modal("openModal"); */
+			
+			$("#product-addtocart-button-prescription").on('click',function(){ 
+                $("#prescription-modal-content").modal("openModal");
+            });
+			
+		}  
+	);
+	
+	require(['jquery', 'jquery/ui', 'slick'], function($){
+	    $(document).ready(function() {
+	        $('.slick-slider').slick({
+	            dots: true,
+	            infinite: false,
+	            slidesToShow: 3,
+	            slidesToScroll: 1,
+	            autoplay: true
+	        });
+	    });
+	});
+</script>
+

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Bharat Optics | Contact Us</title>
+		<meta name="description" content="We are always happy to hear from you. Feel Free to contact us and we'll get back to you as soon as possible." />
+		<meta name="keywords" content="contact us,24/7 online , email us, open bharat optics franchisee" />
+    </head>    
+</page>
